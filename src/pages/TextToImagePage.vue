@@ -66,13 +66,13 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
           id: 0,
         },
       },
-      denoising: { // eslint-disable-line @stylistic/object-curly-newline
-      }, // eslint-disable-line @stylistic/object-curly-newline
+      denoising: {
+        inputAdherenceScale: 7.5,
+      },
     },
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
       steps      : get(currentNumberOfDiffusionSteps),
-      cfgScale   : 7.5,
     },
   });
 

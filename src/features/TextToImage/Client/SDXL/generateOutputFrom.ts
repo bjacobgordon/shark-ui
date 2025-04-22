@@ -59,7 +59,19 @@ interface SDXL_TextToImage_Pipeline_Config_Preprocessing
   initialNoise: SDXL_TextToImage_Pipeline_Config_InitialNoise;
 }
 
-type SDXL_TextToImage_Pipeline_Config_Denoising = TextToImage_Pipeline.Config.Denoising;
+type SDXL_TextToImage_Pipeline_Config_Denoising_ClassifierFreeGuidanceScale = Brand.Branded<number, 'TextToImage_Pipeline_SDXL_Denoising_ClassifierFreeGuidanceScale'>; // TODO: refine to floating point within some range
+
+interface SDXL_TextToImage_Pipeline_Config_Denoising
+  extends TextToImage_Pipeline.Config.Denoising {
+  /**
+   * How much each final result of reverse diffusion should stray away from the prompt-less pass towards the prompted pass.
+   *
+   * c.k.a. "classifier-free guidance scale", but we:
+   * - exclude "classifier-free" because it's pipeline-speak for "doesn't require a separate model because we do it in the denoising phase"
+   * - trade "guidance" for "inputAdherence" to reduce vagueness
+   */
+  inputAdherenceScale?: SDXL_TextToImage_Pipeline_Config_Denoising_ClassifierFreeGuidanceScale;
+}
 
 type SDXL_TextToImage_Pipeline_Config_Postprocessing = TextToImage_Pipeline.Config.Postprocessing;
 
@@ -75,7 +87,6 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
     | 'steps'
-    | 'cfgScale'
     >;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
@@ -89,7 +100,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
       width      : given.config?.preprocessing?.canvas.width,
       seed       : given.config?.preprocessing?.initialNoise.id,
       steps      : given.textToImageRequestBody.steps,
-      cfgScale   : given.textToImageRequestBody.cfgScale,
+      cfgScale   : given.config?.denoising?.inputAdherenceScale,
     },
   });
 
