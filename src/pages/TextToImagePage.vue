@@ -67,12 +67,12 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
         },
       },
       denoising: {
+        sliceCount         : SDXL.DiffusionStepCount.from(get(currentNumberOfDiffusionSteps)),
         inputAdherenceScale: 7.5,
       },
     },
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
-      steps      : get(currentNumberOfDiffusionSteps),
     },
   });
 

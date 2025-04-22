@@ -12,6 +12,10 @@ import type {
 } from 'stabilityai-client-typescript/models/operations';
 
 import type {
+  SDXL,
+} from '@/library/ShimmedStabilityAIClient';
+
+import type {
   TextToImage_Pipeline,
 } from '../../Pipeline';
 
@@ -64,6 +68,19 @@ type SDXL_TextToImage_Pipeline_Config_Denoising_ClassifierFreeGuidanceScale = Br
 interface SDXL_TextToImage_Pipeline_Config_Denoising
   extends TextToImage_Pipeline.Config.Denoising {
   /**
+   * Determines the granularity of each step of reverse diffusion.
+   *
+   * It's like slices of a pie:
+   * - _less_ slices means _bigger_ slices requiring _less_ work but yielding _coarser_ output
+   * - _more_ slices means _smaller_ slices requiring _more_ work but yielding _finer_ output.
+   *
+   * Has a fixed range because, after a certain point, more "slices of the pie" lead to "mush" (weird images)
+   *
+   * c.k.a. "step count", but this name might imply that increasing the count will continue to improve the output.
+   * But in reality, doing so will eventually have adverse effects.
+   */
+  sliceCount?: SDXL.DiffusionStepCount;
+  /**
    * How much each final result of reverse diffusion should stray away from the prompt-less pass towards the prompted pass.
    *
    * c.k.a. "classifier-free guidance scale", but we:
@@ -86,7 +103,6 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     config?: SDXL_TextToImage_Pipeline_Config;
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
-    | 'steps'
     >;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
@@ -99,7 +115,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
       height     : given.config?.preprocessing?.canvas.height,
       width      : given.config?.preprocessing?.canvas.width,
       seed       : given.config?.preprocessing?.initialNoise.id,
-      steps      : given.textToImageRequestBody.steps,
+      steps      : given.config?.denoising?.sliceCount?.asNumber,
       cfgScale   : given.config?.denoising?.inputAdherenceScale,
     },
   });
