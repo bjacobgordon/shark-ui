@@ -30,7 +30,20 @@ import {
   toSharkUIOutput,
 } from './toSharkUIOutput';
 
-type SDXL_TextToImage_Pipeline_Config_Preprocessing = TextToImage_Pipeline.Config.Preprocessing;
+interface SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas {
+  height: 1024;
+  width: 1024;
+}
+
+interface SDXL_TextToImage_Pipeline_Config_Preprocessing
+  extends TextToImage_Pipeline.Config.Preprocessing {
+  /**
+   * Describes the dimensions of the output. Constrains:
+   * - the aspect ratio to be within with a model's training data
+   * - the required scale factors to be within the range of the pipeline's capabilities to upscale from latent space
+   */
+  canvas: SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas;
+}
 
 type SDXL_TextToImage_Pipeline_Config_Denoising = TextToImage_Pipeline.Config.Denoising;
 
@@ -47,8 +60,6 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     config?: SDXL_TextToImage_Pipeline_Config;
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
-    | 'height'
-    | 'width'
     | 'steps'
     | 'cfgScale'
     | 'seed'
@@ -61,8 +72,8 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
       textPrompts: given.textToImageRequestBody.textPrompts,
-      height     : given.textToImageRequestBody.height,
-      width      : given.textToImageRequestBody.width,
+      height     : given.config?.preprocessing?.canvas.height,
+      width      : given.config?.preprocessing?.canvas.width,
       seed       : given.textToImageRequestBody.seed,
       steps      : given.textToImageRequestBody.steps,
       cfgScale   : given.textToImageRequestBody.cfgScale,

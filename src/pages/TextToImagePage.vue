@@ -57,15 +57,17 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
 
   const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
     config: {
-      preprocessing: { // eslint-disable-line @stylistic/object-curly-newline
-      }, // eslint-disable-line @stylistic/object-curly-newline
-      denoising    : { // eslint-disable-line @stylistic/object-curly-newline
+      preprocessing: {
+        canvas: {
+          height: 1024,
+          width : 1024,
+        },
+      },
+      denoising: { // eslint-disable-line @stylistic/object-curly-newline
       }, // eslint-disable-line @stylistic/object-curly-newline
     },
     textToImageRequestBody: {
       textPrompts: proposedPrompt,
-      height     : 1024,
-      width      : 1024,
       steps      : get(currentNumberOfDiffusionSteps),
       cfgScale   : 7.5,
       seed       : 0,
