@@ -56,6 +56,9 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
   );
 
   const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
+    input: {
+      text: proposedPrompt,
+    },
     config: {
       preprocessing: {
         canvas: {
@@ -70,9 +73,6 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
         sliceCount         : SDXL.DiffusionStepCount.from(get(currentNumberOfDiffusionSteps)),
         inputAdherenceScale: 7.5,
       },
-    },
-    textToImageRequestBody: {
-      textPrompts: proposedPrompt,
     },
   });
 

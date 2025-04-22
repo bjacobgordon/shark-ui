@@ -8,10 +8,6 @@ import {
 } from 'effect';
 
 import type {
-  GenerateFromTextRequest,
-} from 'stabilityai-client-typescript/models/operations';
-
-import type {
   SDXL,
 } from '@/library/ShimmedStabilityAIClient';
 
@@ -100,10 +96,8 @@ type SDXL_TextToImage_Pipeline_Config = TextToImage_Pipeline.Config<
 
 const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
+    input: TextToImage_Pipeline.Input;
     config?: SDXL_TextToImage_Pipeline_Config;
-    textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
-    | 'textPrompts'
-    >;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
   const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize;
@@ -111,7 +105,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
   const promisedTextToImageResponse = shimmedStabilityAIClient.version1.image.forciblyGenerateFromText({
     engineId              : 'stable-diffusion-xl-1024-v1-0',
     textToImageRequestBody: {
-      textPrompts: given.textToImageRequestBody.textPrompts,
+      textPrompts: given.input.text,
       height     : given.config?.preprocessing?.canvas.height,
       width      : given.config?.preprocessing?.canvas.width,
       seed       : given.config?.preprocessing?.initialNoise.id,
@@ -135,7 +129,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
 
   const soleTextToImageOutput = yield* toSharkUIOutput.first({
     in          : textToImageResponse,
-    inferredFrom: given.textToImageRequestBody.textPrompts,
+    inferredFrom: given.input.text,
   }).pipe(Effect.orDie);
 
   return soleTextToImageOutput;
