@@ -62,6 +62,9 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
           height: 1024,
           width : 1024,
         },
+        initialNoise: {
+          id: 0,
+        },
       },
       denoising: { // eslint-disable-line @stylistic/object-curly-newline
       }, // eslint-disable-line @stylistic/object-curly-newline
@@ -70,7 +73,6 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
       textPrompts: proposedPrompt,
       steps      : get(currentNumberOfDiffusionSteps),
       cfgScale   : 7.5,
-      seed       : 0,
     },
   });
 

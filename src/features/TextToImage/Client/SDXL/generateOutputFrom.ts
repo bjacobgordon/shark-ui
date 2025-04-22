@@ -3,6 +3,7 @@ import {
 } from '@effect/platform';
 
 import {
+  type Brand,
   Effect,
 } from 'effect';
 
@@ -35,6 +36,12 @@ interface SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas {
   width: 1024;
 }
 
+type TextToImage_Pipeline_SDXL_Config_NoiseId = Brand.Branded<number, 'TextToImage_Pipeline_SDXL_Config_NoiseId'>; // TODO: refine to whole numbers within a specific range
+
+interface SDXL_TextToImage_Pipeline_Config_InitialNoise {
+  id: TextToImage_Pipeline_SDXL_Config_NoiseId;
+}
+
 interface SDXL_TextToImage_Pipeline_Config_Preprocessing
   extends TextToImage_Pipeline.Config.Preprocessing {
   /**
@@ -43,6 +50,13 @@ interface SDXL_TextToImage_Pipeline_Config_Preprocessing
    * - the required scale factors to be within the range of the pipeline's capabilities to upscale from latent space
    */
   canvas: SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas;
+  /**
+   * The artifact to be used as the starting point for denoising.
+   * This the "soil" containing some "seed" that will grow into a "plant" (output image) as we apply the "fertilizer" (prompts)
+   *
+   * c.k.a. the "seed", but that's a misnomer; it's more like the "soil" that _contains_ the "seed")
+   */
+  initialNoise: SDXL_TextToImage_Pipeline_Config_InitialNoise;
 }
 
 type SDXL_TextToImage_Pipeline_Config_Denoising = TextToImage_Pipeline.Config.Denoising;
@@ -62,7 +76,6 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
     | 'textPrompts'
     | 'steps'
     | 'cfgScale'
-    | 'seed'
     >;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
@@ -74,7 +87,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
       textPrompts: given.textToImageRequestBody.textPrompts,
       height     : given.config?.preprocessing?.canvas.height,
       width      : given.config?.preprocessing?.canvas.width,
-      seed       : given.textToImageRequestBody.seed,
+      seed       : given.config?.preprocessing?.initialNoise.id,
       steps      : given.textToImageRequestBody.steps,
       cfgScale   : given.textToImageRequestBody.cfgScale,
     },
