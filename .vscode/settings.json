@@ -56,6 +56,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.test.ts",
+    "docker-compose.*.yml": "dev.Dockerfile, .dockerignore",
     "tsconfig.json": "tsconfig.*.json",
     "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*, env.d.ts",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*",

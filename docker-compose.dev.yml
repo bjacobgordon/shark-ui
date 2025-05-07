@@ -1,0 +1,18 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    environment:
+      # cspell:words chokidar usepolling
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+      - VITE__TEXT_TO_IMAGE__API__SERVER__ORIGIN=${INFERENCE_SERVER_ORIGIN:-http://localhost:8000}
+      - PORT=${CONTAINER_PORT:-5173}
+    ports:
+      - "${BROWSER_APP_PORT:-5173}:${CONTAINER_PORT:-5173}"
+    volumes:
+      - .:/service
+      - node_mods:/service/node_modules
+volumes:
+  node_mods:
