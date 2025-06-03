@@ -15,9 +15,7 @@ import {
   VCard,
 } from 'vuetify/components/VCard';
 
-import {
-  VTextarea,
-} from 'vuetify/components/VTextarea';
+import DynamicTextarea from '@/components/DynamicTextarea.vue';
 
 import type {
   TextToImage_Pipeline,
@@ -132,26 +130,18 @@ watch(
     :subtitle="label"
   >
     <template #text>
-      <VTextarea
+      <DynamicTextarea
         v-model="currentInputText.positive"
         :label="positive.label"
         :placeholder="positive.placeholder"
-        rows="3"
-        auto-grow
-        max-rows="10"
-        hide-details
       />
 
       <br>
 
-      <VTextarea
+      <DynamicTextarea
         v-model="currentInputText.negative"
         :label="negative.label"
         :placeholder="negative.placeholder"
-        rows="3"
-        auto-grow
-        max-rows="10"
-        hide-details
       />
     </template>
   </VCard>
