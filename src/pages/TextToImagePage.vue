@@ -81,10 +81,12 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
         label="Prompts"
         :positive="{
           label: 'Imagine...',
+          initial: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
           placeholder: 'What would you like to see?',
         }"
         :negative="{
           label: 'Avoid...',
+          initial: 'Watermark, blurry, over-saturated, low resolution, pollution',
           placeholder: 'What should be avoided?',
         }"
       />

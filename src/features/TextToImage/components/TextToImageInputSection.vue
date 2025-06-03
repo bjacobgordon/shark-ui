@@ -31,10 +31,11 @@ const exposedInputText = defineModel<Option.Option<StandardizedInputText>>({
 
 interface InputTextFieldProps {
   label: string;
+  initial: string;
   placeholder: string;
 }
 
-defineProps<{
+const given = defineProps<{
   label: string;
   positive: InputTextFieldProps;
   negative: InputTextFieldProps;
@@ -102,8 +103,8 @@ const standardized = (givenInputText: InputTextByQualitativeWeight): Standardize
 };
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {
-  positive: 'a cat under the snow with blue eyes, covered by snow, cinematic style, medium shot, professional photo, animal',
-  negative: 'Watermark, blurry, over-saturated, low resolution, pollution',
+  positive: given.positive.initial,
+  negative: given.negative.initial,
 };
 
 const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
