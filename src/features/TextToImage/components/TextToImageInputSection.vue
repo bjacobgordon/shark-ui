@@ -12,8 +12,14 @@ import {
 } from 'effect';
 
 import {
+  isEmptyArray,
+} from 'effect/Array';
+
+import {
   VCard,
 } from 'vuetify/components/VCard';
+
+import NonTrivialString from '@/library/NonTrivialString';
 
 import DynamicTextarea from '@/components/DynamicTextarea.vue';
 
@@ -48,7 +54,7 @@ type QualitativeToQuantitativeTextWeightMap = typeof qualitativeToQuantitativeTe
 
 type QualitativeTextWeight = keyof QualitativeToQuantitativeTextWeightMap;
 
-type InputTextByQualitativeWeight = Record<QualitativeTextWeight, string>;
+type InputTextByQualitativeWeight = Record<QualitativeTextWeight, Option.Option<NonTrivialString>>;
 
 const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextByQualitativeWeight => {
   const entriesForInputTextByQualitativeWeight = Object.entries(qualitativeToQuantitativeTextWeightMap)
@@ -78,9 +84,9 @@ const byQualitativeWeight = (givenInputText: StandardizedInputText): InputTextBy
   return computedInputTextByQualitativeWeight as unknown as InputTextByQualitativeWeight;
 };
 
-const standardized = (givenInputText: InputTextByQualitativeWeight): StandardizedInputText => {
-  const computedInputText = Object.entries(qualitativeToQuantitativeTextWeightMap)
-    .map((eachWeightMapEntry): StandardizedInputText[number] => {
+const standardized = (givenInputText: InputTextByQualitativeWeight): Option.Option<StandardizedInputText> => Option.gen(function* () {
+  const sparseStandardizedInputText = Object.entries(qualitativeToQuantitativeTextWeightMap)
+    .map((eachWeightMapEntry): Option.Option<StandardizedInputText[number]> => Option.gen(function* () {
       const [
         eachUnsafeQualitativeWeight,
         eachQuantitativeWeight,
@@ -90,19 +96,25 @@ const standardized = (givenInputText: InputTextByQualitativeWeight): Standardize
       const weightedText = givenInputText[eachQualitativeWeight];
 
       const newInputTextComponent = {
-        text  : weightedText,
+        text  : yield* weightedText,
         weight: eachQuantitativeWeight,
       };
 
       return newInputTextComponent;
-    });
+    }));
 
-  return computedInputText;
-};
+  const standardizedInputText = yield* Option.all(sparseStandardizedInputText);
+
+  if (
+    isEmptyArray(standardizedInputText)
+  ) return yield* Option.none();
+
+  return standardizedInputText;
+});
 
 const defaultInitialInputText: InputTextByQualitativeWeight = {
-  positive: given.positive.initial,
-  negative: given.negative.initial,
+  positive: NonTrivialString.option(given.positive.initial),
+  negative: NonTrivialString.option(given.negative.initial),
 };
 
 const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
@@ -115,7 +127,7 @@ const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText
 watch(
   currentInputText,
   (updatedInputText) => {
-    const wrappedInputText = Option.some(standardized(updatedInputText));
+    const wrappedInputText = standardized(updatedInputText);
     set(exposedInputText, wrappedInputText);
   },
   {

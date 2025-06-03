@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import {
+  ref,
+  set,
+  type Ref,
   computed,
+  watch,
 } from '@/library/vue';
 
 import {
+  type Option,
   String,
 } from 'effect';
 
@@ -17,7 +22,7 @@ import type {
 
 import NonTrivialString from '@/library/NonTrivialString';
 
-const currentText = defineModel<string>({
+const exposedText = defineModel<Option.Option<NonTrivialString>>({
   required: true,
 });
 
@@ -32,6 +37,18 @@ const given = withDefaults(
   {
     rows   : 3,
     maxRows: 10,
+  },
+);
+
+const currentText: Ref<string> = ref('');
+
+watch(
+  currentText,
+  (updatedText) => {
+    set(exposedText, NonTrivialString.option(updatedText));
+  },
+  {
+    immediate: true,
   },
 );
 
