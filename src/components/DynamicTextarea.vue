@@ -29,6 +29,7 @@ const exposedText = defineModel<Option.Option<NonTrivialString>>({
 const given = withDefaults(
   defineProps<{
     label: string;
+    initial: string;
     placeholder: string;
     required?: boolean;
     rows?: number;
@@ -40,7 +41,7 @@ const given = withDefaults(
   },
 );
 
-const currentText: Ref<string> = ref('');
+const currentText: Ref<string> = ref(given.initial);
 
 watch(
   currentText,

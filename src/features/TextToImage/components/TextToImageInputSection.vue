@@ -39,7 +39,7 @@ interface InputTextFieldProps {
   placeholder: string;
 }
 
-const given = defineProps<{
+defineProps<{
   label: string;
   positive: InputTextFieldProps;
   negative: InputTextFieldProps;
@@ -112,14 +112,14 @@ const standardized = (givenInputText: InputTextByQualitativeWeight): Option.Opti
   return standardizedInputText;
 });
 
-const defaultInitialInputText: InputTextByQualitativeWeight = {
-  positive: NonTrivialString.option(given.positive.initial),
-  negative: NonTrivialString.option(given.negative.initial),
+const emptyInitialInputText: InputTextByQualitativeWeight = {
+  positive: Option.none(),
+  negative: Option.none(),
 };
 
 const initialInputText: InputTextByQualitativeWeight = Option.match(get(exposedInputText), {
   onSome: ($0) => byQualitativeWeight($0),
-  onNone: () => defaultInitialInputText,
+  onNone: () => emptyInitialInputText,
 });
 
 const currentInputText: Ref<InputTextByQualitativeWeight> = ref(initialInputText);
@@ -144,6 +144,7 @@ watch(
     <template #text>
       <DynamicTextarea
         v-model="currentInputText.positive"
+        :initial="positive.initial"
         :label="positive.label"
         :placeholder="positive.placeholder"
         required
@@ -153,6 +154,7 @@ watch(
 
       <DynamicTextarea
         v-model="currentInputText.negative"
+        :initial="negative.initial"
         :label="negative.label"
         :placeholder="negative.placeholder"
       />
