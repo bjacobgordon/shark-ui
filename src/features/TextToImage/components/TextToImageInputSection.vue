@@ -134,6 +134,7 @@ watch(
         v-model="currentInputText.positive"
         :label="positive.label"
         :placeholder="positive.placeholder"
+        required
       />
 
       <br>
