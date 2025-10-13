@@ -10,6 +10,10 @@ import type {
   GenerateFromTextRequest,
 } from 'stabilityai-client-typescript/models/operations';
 
+import type {
+  TextToImage_Pipeline,
+} from '../../Pipeline';
+
 import {
   TextToImage_Server,
 } from '../../Server';
@@ -26,8 +30,21 @@ import {
   toSharkUIOutput,
 } from './toSharkUIOutput';
 
+type SDXL_TextToImage_Pipeline_Config_Preprocessing = TextToImage_Pipeline.Config.Preprocessing;
+
+type SDXL_TextToImage_Pipeline_Config_Denoising = TextToImage_Pipeline.Config.Denoising;
+
+type SDXL_TextToImage_Pipeline_Config_Postprocessing = TextToImage_Pipeline.Config.Postprocessing;
+
+type SDXL_TextToImage_Pipeline_Config = TextToImage_Pipeline.Config<
+  SDXL_TextToImage_Pipeline_Config_Preprocessing,
+  SDXL_TextToImage_Pipeline_Config_Denoising,
+  SDXL_TextToImage_Pipeline_Config_Postprocessing
+>;
+
 const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
+    config?: SDXL_TextToImage_Pipeline_Config;
     textToImageRequestBody: Pick<GenerateFromTextRequest['textToImageRequestBody'],
     | 'textPrompts'
     | 'height'
