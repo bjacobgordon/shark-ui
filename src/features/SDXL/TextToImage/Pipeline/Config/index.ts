@@ -1,1 +1,1 @@
-export type * from './exports.object.primary.ts';
+export * from './exports.object.primary.ts';
