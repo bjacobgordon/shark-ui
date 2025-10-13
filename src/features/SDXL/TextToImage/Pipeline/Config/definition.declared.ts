@@ -6,10 +6,18 @@ import type {
   SDXL_TextToImage_Pipeline_Config_Denoising,
 } from './Denoising';
 
+import type {
+  SDXL_TextToImage_Pipeline_Config_Postprocessing,
+} from './Postprocessing';
+
+import type {
+  SDXL_TextToImage_Pipeline_Config_Preprocessing,
+} from './Preprocessing';
+
 type SDXL_TextToImage_Pipeline_Config = TextToImage.Pipeline.Config<
-  /**/ TextToImage.Pipeline.Config.Preprocessing,
+  SDXL_TextToImage_Pipeline_Config_Preprocessing,
   SDXL_TextToImage_Pipeline_Config_Denoising,
-  /**/ TextToImage.Pipeline.Config.Postprocessing
+  SDXL_TextToImage_Pipeline_Config_Postprocessing
 >;
 
 function SDXL_TextToImage_Pipeline_Config(
