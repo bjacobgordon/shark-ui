@@ -32,11 +32,15 @@ import {
 } from 'vuetify/components/VSkeletonLoader';
 
 import {
-  SDXL,
+  SDXL as DepSDXL,
 } from '@/library/ShimmedStabilityAIClient';
 
 import DiscreteSlider from '@/components/DiscreteSlider.vue';
 import NavigationPanel from '@/components/NavigationPanel.vue';
+
+import {
+  SDXL,
+} from '@/features/SDXL';
 
 import TextToImage from '@/features/TextToImage';
 import TextToImageInputSection from '@/features/TextToImage/components/TextToImageInputSection.vue';
@@ -46,7 +50,7 @@ const currentPrompt: Ref<Option.Option<TextToImage.Pipeline.Input['text']>> = re
 
 const {
   range,
-} = SDXL.DiffusionStepCount;
+} = DepSDXL.DiffusionStepCount;
 
 const currentNumberOfDiffusionSteps = ref<number>(range.midpoint);
 
@@ -54,6 +58,8 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
   const proposedPrompt = yield* get(currentPrompt).pipe(
     Effect.orDieWith(() => new Error('Prompt was not set before submission')),
   );
+
+  const proposedNumberOfDiffusionSlices = get(currentNumberOfDiffusionSteps);
 
   const generatedOutput = yield* TextToImage.Client.SDXL.generateOutputFrom({
     input: {
@@ -66,12 +72,12 @@ const imageGeneration = progressiveRef(Effect.gen(function* () {
           width : 1024,
         },
         initialNoise: {
-          id: 0,
+          id: SDXL.TextToImage.Pipeline.Config.Preprocessing.InitialNoise.Id(0),
         },
       },
       denoising: {
-        sliceCount         : SDXL.DiffusionStepCount.from(get(currentNumberOfDiffusionSteps)),
-        inputAdherenceScale: 7.5,
+        sliceCount          : DepSDXL.DiffusionStepCount.from(proposedNumberOfDiffusionSlices),
+        inputAdherenceFactor: SDXL.TextToImage.Pipeline.Config.Denoising.InputAdherenceFactor(7.5),
       },
     },
   });

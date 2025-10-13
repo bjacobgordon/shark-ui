@@ -3,13 +3,12 @@ import {
 } from '@effect/platform';
 
 import {
-  type Brand,
   Effect,
 } from 'effect';
 
 import type {
   SDXL,
-} from '@/library/ShimmedStabilityAIClient';
+} from '@/features/SDXL';
 
 import type {
   TextToImage_Pipeline,
@@ -31,73 +30,10 @@ import {
   toSharkUIOutput,
 } from './toSharkUIOutput';
 
-interface SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas {
-  height: 1024;
-  width: 1024;
-}
-
-type TextToImage_Pipeline_SDXL_Config_NoiseId = Brand.Branded<number, 'TextToImage_Pipeline_SDXL_Config_NoiseId'>; // TODO: refine to whole numbers within a specific range
-
-interface SDXL_TextToImage_Pipeline_Config_InitialNoise {
-  id: TextToImage_Pipeline_SDXL_Config_NoiseId;
-}
-
-interface SDXL_TextToImage_Pipeline_Config_Preprocessing
-  extends TextToImage_Pipeline.Config.Preprocessing {
-  /**
-   * Describes the dimensions of the output. Constrains:
-   * - the aspect ratio to be within with a model's training data
-   * - the required scale factors to be within the range of the pipeline's capabilities to upscale from latent space
-   */
-  canvas: SDXL_TextToImage_Pipeline_Config_Preprocessing_Canvas;
-  /**
-   * The artifact to be used as the starting point for denoising.
-   * This the "soil" containing some "seed" that will grow into a "plant" (output image) as we apply the "fertilizer" (prompts)
-   *
-   * c.k.a. the "seed", but that's a misnomer; it's more like the "soil" that _contains_ the "seed")
-   */
-  initialNoise: SDXL_TextToImage_Pipeline_Config_InitialNoise;
-}
-
-type SDXL_TextToImage_Pipeline_Config_Denoising_ClassifierFreeGuidanceScale = Brand.Branded<number, 'TextToImage_Pipeline_SDXL_Denoising_ClassifierFreeGuidanceScale'>; // TODO: refine to floating point within some range
-
-interface SDXL_TextToImage_Pipeline_Config_Denoising
-  extends TextToImage_Pipeline.Config.Denoising {
-  /**
-   * Determines the granularity of each step of reverse diffusion.
-   *
-   * It's like slices of a pie:
-   * - _less_ slices means _bigger_ slices requiring _less_ work but yielding _coarser_ output
-   * - _more_ slices means _smaller_ slices requiring _more_ work but yielding _finer_ output.
-   *
-   * Has a fixed range because, after a certain point, more "slices of the pie" lead to "mush" (weird images)
-   *
-   * c.k.a. "step count", but this name might imply that increasing the count will continue to improve the output.
-   * But in reality, doing so will eventually have adverse effects.
-   */
-  sliceCount?: SDXL.DiffusionStepCount;
-  /**
-   * How much each final result of reverse diffusion should stray away from the prompt-less pass towards the prompted pass.
-   *
-   * c.k.a. "classifier-free guidance scale", but we:
-   * - exclude "classifier-free" because it's pipeline-speak for "doesn't require a separate model because we do it in the denoising phase"
-   * - trade "guidance" for "inputAdherence" to reduce vagueness
-   */
-  inputAdherenceScale?: SDXL_TextToImage_Pipeline_Config_Denoising_ClassifierFreeGuidanceScale;
-}
-
-type SDXL_TextToImage_Pipeline_Config_Postprocessing = TextToImage_Pipeline.Config.Postprocessing;
-
-type SDXL_TextToImage_Pipeline_Config = TextToImage_Pipeline.Config<
-  SDXL_TextToImage_Pipeline_Config_Preprocessing,
-  SDXL_TextToImage_Pipeline_Config_Denoising,
-  SDXL_TextToImage_Pipeline_Config_Postprocessing
->;
-
 const TextToImage_Client_SDXL_generateOutputFrom = (
   given: {
     input: TextToImage_Pipeline.Input;
-    config?: SDXL_TextToImage_Pipeline_Config;
+    config?: SDXL.TextToImage.Pipeline.Config;
   },
 ): TextToImage_Client_Generation.Effect => Effect.gen(function* () {
   const shimmedStabilityAIClient = yield* TextToImage_Client_SDXL_initialize;
@@ -110,7 +46,7 @@ const TextToImage_Client_SDXL_generateOutputFrom = (
       width      : given.config?.preprocessing?.canvas.width,
       seed       : given.config?.preprocessing?.initialNoise.id,
       steps      : given.config?.denoising?.sliceCount?.asNumber,
-      cfgScale   : given.config?.denoising?.inputAdherenceScale,
+      cfgScale   : given.config?.denoising?.inputAdherenceFactor,
     },
   });
 
