@@ -127,7 +127,9 @@ flowchart LR
 
 
     subgraph RemoteApplication_InferencePipeline_API[Inference Pipeline API]
-      RemoteApplication_InferencePipeline_API_TextToImage[Text-To-Image]
+      subgraph RemoteApplication_InferencePipeline_API_TextToImage[Text-To-Image]
+        RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
+      end
       class RemoteApplication_InferencePipeline_API_TextToImage InferenceModality
 
       RemoteApplication_InferencePipeline_API_MultiModal[Multi-Modal]
@@ -139,8 +141,7 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API Contract
 
 
-    RemoteApplication_InferencePipeline_API_TextToImage RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToImage
-    class RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline InferenceModality
+    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_InferencePipeline_TextToImage_SDXL
 
     RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_MultiModal
     class RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline InferenceModality
