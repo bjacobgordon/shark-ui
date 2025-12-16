@@ -1,7 +1,9 @@
 flowchart LR
   classDef Contract stroke: #00F, stroke-dasharray: 5
 
-  BrowserApplication[Browser Application]
+  subgraph BrowserApplication[Browser Application]
+    BrowserApplication_WebServiceSDK[Web Service SDK]
+  end
 
   BrowserApplication --> WebAPI
 
@@ -10,4 +12,6 @@ flowchart LR
 
   WebAPI --> RemoteApplication
 
-  RemoteApplication[Remote Application]
+  subgraph RemoteApplication[Remote Application]
+    RemoteApplication_WebService[Web Service]
+  end
