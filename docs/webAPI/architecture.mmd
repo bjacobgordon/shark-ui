@@ -1,9 +1,13 @@
-flowchart
+flowchart LR
   classDef Contract stroke: #00F, stroke-dasharray: 5
 
   BrowserApplication[Browser Application]
 
+  BrowserApplication --> WebAPI
+
   WebAPI[Web API]
   class WebAPI Contract
+
+  WebAPI --> RemoteApplication
 
   RemoteApplication[Remote Application]
