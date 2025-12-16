@@ -28,13 +28,13 @@ flowchart LR
     RemoteApplication_WebService[Web Service]
     class RemoteApplication_WebService ApplicationModule
 
-    RemoteApplication_WebService --> RemoteApplication_DomainSpecificJob_API
+    RemoteApplication_WebService --> RemoteApplication_InferencePipeline_API
 
-    RemoteApplication_DomainSpecificJob_API[Domain-Specific Job API]
-    class RemoteApplication_DomainSpecificJob_API Contract
+    RemoteApplication_InferencePipeline_API[Inference Pipeline API]
+    class RemoteApplication_InferencePipeline_API Contract
 
-    RemoteApplication_DomainSpecificJob_API --> RemoteApplication_DomainSpecificJob
+    RemoteApplication_InferencePipeline_API --> RemoteApplication_InferencePipeline
 
-    RemoteApplication_DomainSpecificJob[Domain-Specific Job]
-    class RemoteApplication_DomainSpecificJob ApplicationModule
+    RemoteApplication_InferencePipeline[Inference Pipeline]
+    class RemoteApplication_InferencePipeline ApplicationModule
   end
