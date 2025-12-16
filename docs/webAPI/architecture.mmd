@@ -4,7 +4,16 @@ flowchart LR
   classDef InferenceModality stroke: #F00, stroke-dasharray: 5
 
   subgraph BrowserApplication[Browser Application]
-    BrowserApplication_WebPage[Web Page]
+    subgraph BrowserApplication_WebPage[Web Page]
+      BrowserApplication_WebPage_TextToImage[Text-To-Image]
+      class BrowserApplication_WebPage_TextToImage InferenceModality
+
+      BrowserApplication_WebPage_MultiModal[Multi-Modal]
+      class BrowserApplication_WebPage_MultiModal InferenceModality
+
+      BrowserApplication_WebPage_TextToText[Text-To-Text]
+      class BrowserApplication_WebPage_TextToText InferenceModality
+    end
     class BrowserApplication_WebPage ApplicationModule
 
 
@@ -18,7 +27,16 @@ flowchart LR
     class BrowserApplication_WebPage__TextToText__BrowserApplication_WebServiceSDK_API InferenceModality
 
 
-    BrowserApplication_WebServiceSDK_API[Web Service SDK API]
+    subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
+      BrowserApplication_WebServiceSDK_API_TextToImage[Text-To-Image]
+      class BrowserApplication_WebServiceSDK_API_TextToImage InferenceModality
+
+      BrowserApplication_WebServiceSDK_API_MultiModal[Multi-Modal]
+      class BrowserApplication_WebServiceSDK_API_MultiModal InferenceModality
+
+      BrowserApplication_WebServiceSDK_API_TextToText[Text-To-Text]
+      class BrowserApplication_WebServiceSDK_API_TextToText InferenceModality
+    end
     class BrowserApplication_WebServiceSDK_API Contract
 
 
@@ -32,7 +50,16 @@ flowchart LR
     class BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK InferenceModality
 
 
-    BrowserApplication_WebServiceSDK[Web Service SDK]
+    subgraph BrowserApplication_WebServiceSDK[Web Service SDK]
+      BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
+      class BrowserApplication_WebServiceSDK_TextToImage InferenceModality
+
+      BrowserApplication_WebServiceSDK_MultiModal[Multi-Modal]
+      class BrowserApplication_WebServiceSDK_MultiModal InferenceModality
+
+      BrowserApplication_WebServiceSDK_TextToText[Text-To-Text]
+      class BrowserApplication_WebServiceSDK_TextToText InferenceModality
+    end
     class BrowserApplication_WebServiceSDK ApplicationModule
   end
 
@@ -47,7 +74,16 @@ flowchart LR
   class BrowserApplication_WebServiceSDK__TextToText__WebAPI InferenceModality
 
 
-  WebAPI[Web API]
+  subgraph WebAPI[Web API]
+    WebAPI_TextToImage[Text-To-Image]
+    class WebAPI_TextToImage InferenceModality
+
+    WebAPI_MultiModal[Multi-Modal]
+    class WebAPI_MultiModal InferenceModality
+
+    WebAPI_TextToText[Text-To-Text]
+    class WebAPI_TextToText InferenceModality
+  end
   class WebAPI Contract
 
 
@@ -62,7 +98,16 @@ flowchart LR
 
 
   subgraph RemoteApplication[Remote Application]
-    RemoteApplication_WebService[Web Service]
+    subgraph RemoteApplication_WebService[Web Service]
+      RemoteApplication_WebService_TextToImage[Text-To-Image]
+      class RemoteApplication_WebService_TextToImage InferenceModality
+
+      RemoteApplication_WebService_MultiModal[Multi-Modal]
+      class RemoteApplication_WebService_MultiModal InferenceModality
+
+      RemoteApplication_WebService_TextToText[Text-To-Text]
+      class RemoteApplication_WebService_TextToText InferenceModality
+    end
     class RemoteApplication_WebService ApplicationModule
 
 
@@ -76,7 +121,16 @@ flowchart LR
     class RemoteApplication_WebService__TextToText__RemoteApplication_InferencePipeline_API InferenceModality
 
 
-    RemoteApplication_InferencePipeline_API[Inference Pipeline API]
+    subgraph RemoteApplication_InferencePipeline_API[Inference Pipeline API]
+      RemoteApplication_InferencePipeline_API_TextToImage[Text-To-Image]
+      class RemoteApplication_InferencePipeline_API_TextToImage InferenceModality
+
+      RemoteApplication_InferencePipeline_API_MultiModal[Multi-Modal]
+      class RemoteApplication_InferencePipeline_API_MultiModal InferenceModality
+
+      RemoteApplication_InferencePipeline_API_TextToText[Text-To-Text]
+      class RemoteApplication_InferencePipeline_API_TextToText InferenceModality
+    end
     class RemoteApplication_InferencePipeline_API Contract
 
 
@@ -90,6 +144,15 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline InferenceModality
 
 
-    RemoteApplication_InferencePipeline[Inference Pipeline]
+    subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
+      RemoteApplication_InferencePipeline_TextToImage[Text-To-Image]
+      class RemoteApplication_InferencePipeline_TextToImage InferenceModality
+
+      RemoteApplication_InferencePipeline_MultiModal[Multi-Modal]
+      class RemoteApplication_InferencePipeline_MultiModal InferenceModality
+
+      RemoteApplication_InferencePipeline_TextToText[Text-To-Text]
+      class RemoteApplication_InferencePipeline_TextToText InferenceModality
+    end
     class RemoteApplication_InferencePipeline ApplicationModule
   end
