@@ -7,12 +7,12 @@ flowchart LR
     class BrowserApplication_WebServiceSDK ApplicationModule
   end
 
-  BrowserApplication --> WebAPI
+  BrowserApplication_WebServiceSDK --> WebAPI
 
   WebAPI[Web API]
   class WebAPI Contract
 
-  WebAPI --> RemoteApplication
+  WebAPI --> RemoteApplication_WebService
 
   subgraph RemoteApplication[Remote Application]
     RemoteApplication_WebService[Web Service]
