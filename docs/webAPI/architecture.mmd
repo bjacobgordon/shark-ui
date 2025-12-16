@@ -3,6 +3,9 @@ flowchart LR
   classDef ApplicationModule stroke: #0F0, stroke-dasharray: 5
 
   subgraph BrowserApplication[Browser Application]
+    BrowserApplication_WebPage[Web Page]
+    class BrowserApplication_WebPage ApplicationModule
+
     BrowserApplication_WebServiceSDK[Web Service SDK]
     class BrowserApplication_WebServiceSDK ApplicationModule
   end
@@ -17,4 +20,7 @@ flowchart LR
   subgraph RemoteApplication[Remote Application]
     RemoteApplication_WebService[Web Service]
     class RemoteApplication_WebService ApplicationModule
+
+    RemoteApplication_DomainSpecificJob[Domain-Specific Job]
+    class RemoteApplication_DomainSpecificJob ApplicationModule
   end
