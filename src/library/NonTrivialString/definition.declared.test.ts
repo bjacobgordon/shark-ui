@@ -7,7 +7,11 @@ import {
 } from './definition.declared.ts';
 
 describe(NonTrivialString, () => {
-  describe.todo('instantiation');
+  describe('instantiation', () => {
+    describe.todo('the sad outcomes');
+
+    describe.todo('the happy outcomes');
+  });
 
   // TODO: state whether instances should resemble some other primitive type or object
   // e.g. "branded string should still be a string rather than a wrapper object"
