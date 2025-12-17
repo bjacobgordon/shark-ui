@@ -1,5 +1,6 @@
 import {
   describe,
+  it,
 } from 'vitest';
 
 import {
@@ -8,7 +9,11 @@ import {
 
 describe(NonTrivialString, () => {
   describe('instantiation', () => {
-    describe.todo('the sad outcomes');
+    describe('the sad outcomes', () => {
+      it.todo('should reject an empty string');
+
+      it.todo('should reject a whitespace character');
+    });
 
     describe.todo('the happy outcomes');
   });
