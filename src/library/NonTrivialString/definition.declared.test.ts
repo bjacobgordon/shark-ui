@@ -15,7 +15,15 @@ describe(NonTrivialString, () => {
       it.todo('should reject a whitespace character');
     });
 
-    describe.todo('the happy outcomes');
+    describe('the happy outcomes', () => {
+      it.todo('should accept a non-whitespace character');
+
+      it.todo('should accept a padded non-whitespace character');
+
+      it.todo('should accept a string of multiple non-whitespace characters');
+
+      it.todo('should accept a padded string of multiple non-whitespace characters');
+    });
   });
 
   // TODO: state whether instances should resemble some other primitive type or object
