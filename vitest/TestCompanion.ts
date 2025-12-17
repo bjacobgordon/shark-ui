@@ -13,8 +13,10 @@ import {
 } from 'effect/RegExp';
 
 import type {
+  CodeBlockWriter,
   Project,
   SourceFile,
+  WriterFunction,
 } from 'ts-morph';
 
 import TypeScript from '../@internal/TypeScript';
@@ -79,6 +81,7 @@ class TestCompanion
 
     const soleExportFromUnit = yield* this.unit.soleExportUsing(givenProject);
     const soleExportFromUnit_name = soleExportFromUnit.getName();
+    const soleExportFromUnit_isValueConstructor = yield* this.unit.soleExportIsValueConstructorUsing(givenProject);
 
     testCompanionSource.addImportDeclaration({
       moduleSpecifier: `./${this.unit.path.name}`,
@@ -87,7 +90,82 @@ class TestCompanion
       ],
     });
 
-    testCompanionSource.addStatements(`${keyForTestSuiteImport}.todo(${soleExportFromUnit_name});`);
+    interface TestSuite {
+      readonly name: string;
+      readonly body?: WriterFunction;
+    }
+
+    const writeTestSuiteStatementUsing = (
+      givenWriter: CodeBlockWriter,
+    ) => (
+      givenSuite: TestSuite,
+    ): void => {
+      const functionArgument = {
+        start    : '(',
+        delimiter: ',',
+        end      : ')',
+      };
+
+      givenWriter
+        .write(keyForTestSuiteImport)
+        .conditionalWrite(givenSuite.body === undefined, '.todo')
+        .write(functionArgument.start)
+        .quote(givenSuite.name)
+        .write(functionArgument.delimiter);
+
+      if (givenSuite.body !== undefined) {
+        const writeBodyUsing = givenSuite.body;
+        givenWriter.write('() => ').block(() => writeBodyUsing(givenWriter));
+      }
+
+      givenWriter
+        .write(functionArgument.end)
+        .write(';')
+        .newLine();
+    };
+
+    const writeFunctionalSubSuiteStatementsUsing = (
+      givenWriter: CodeBlockWriter,
+    ): void => {
+      writeTestSuiteStatementUsing(givenWriter)({
+        name: 'the sad outcomes',
+      });
+
+      writeTestSuiteStatementUsing(givenWriter)({
+        name: 'the happy outcomes',
+      });
+    };
+
+    const writeObjectOrientedSubSuiteStatementsUsing = (
+      givenWriter: CodeBlockWriter,
+    ): void => {
+      writeTestSuiteStatementUsing(givenWriter)({
+        name: 'instantiation',
+        body: ($0) => writeFunctionalSubSuiteStatementsUsing($0),
+      });
+
+      givenWriter.writeLine('// TODO: state whether instances should resemble some other primitive type or object');
+      givenWriter.writeLine('// e.g. "branded string should still be a string rather than a wrapper object"');
+
+      writeTestSuiteStatementUsing(givenWriter)({
+        name: 'structural compatibility',
+      });
+
+      givenWriter.writeLine('// TODO: state whether instances should be mutable and, if so, specify in what ways');
+
+      writeTestSuiteStatementUsing(givenWriter)({
+        name: 'mutability',
+      });
+    };
+
+    const writeTopLevelTestSuiteStatementUsing: WriterFunction = (givenWriter) => writeTestSuiteStatementUsing(givenWriter)({
+      name: soleExportFromUnit_name,
+      body: ($0) => soleExportFromUnit_isValueConstructor
+        ? writeObjectOrientedSubSuiteStatementsUsing($0)
+        : /**/writeFunctionalSubSuiteStatementsUsing($0),
+    });
+
+    testCompanionSource.addStatements(writeTopLevelTestSuiteStatementUsing);
 
     return testCompanionSource;
   });
