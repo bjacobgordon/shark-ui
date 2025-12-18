@@ -128,6 +128,7 @@ flowchart LR
   subgraph WebAPI[Web API]
     subgraph WebAPI_TextToImage[Text-To-Image]
       WebAPI_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
+      WebAPI_TextToImage_Shortfin_v0_Flux[Shortfin v0 for Flux]
     end
     class WebAPI_TextToImage InferenceModality
 
@@ -141,6 +142,7 @@ flowchart LR
 
 
   WebAPI_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL
+  WebAPI_TextToImage_Shortfin_v0_Flux --> RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux
 
   WebAPI_MultiModal WebAPI__MultiModal__RemoteApplication_WebService@--> RemoteApplication_WebService_MultiModal
   class WebAPI__MultiModal__RemoteApplication_WebService InferenceModality
