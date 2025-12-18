@@ -163,6 +163,7 @@ flowchart LR
   class WebAPI Contract
 
 
+  WebAPI_TextToImage_StabilityAI      --> RemoteApplication_WebService_TextToImage_StabilityAI
   WebAPI_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL
   WebAPI_TextToImage_Shortfin_v0_Flux --> RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux
 
@@ -175,6 +176,7 @@ flowchart LR
   subgraph RemoteApplication[Remote Application]
     subgraph RemoteApplication_WebService[Web Service]
       subgraph RemoteApplication_WebService_TextToImage[Text-To-Image]
+        RemoteApplication_WebService_TextToImage_StabilityAI[Stability AI]
         RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
         RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux[Shortfin v0 for Flux]
       end
