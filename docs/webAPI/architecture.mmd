@@ -56,7 +56,9 @@ flowchart LR
 
 
     subgraph BrowserApplication_WebServiceSDK[Web Service SDK]
-      BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
+      subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
+        BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0[Shortfin v0]
+      end
       class BrowserApplication_WebServiceSDK_TextToImage InferenceModality
 
       BrowserApplication_WebServiceSDK_MultiModal[Multi-Modal]
@@ -69,8 +71,7 @@ flowchart LR
   end
 
 
-  BrowserApplication_WebServiceSDK_TextToImage BrowserApplication_WebServiceSDK__TextToImage__WebAPI@--> WebAPI_TextToImage
-  class BrowserApplication_WebServiceSDK__TextToImage__WebAPI InferenceModality
+  BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0 --> WebAPI_TextToImage_Shortfin_v0_SDXL
 
   BrowserApplication_WebServiceSDK_MultiModal BrowserApplication_WebServiceSDK__MultiModal__WebAPI@--> WebAPI_MultiModal
   class BrowserApplication_WebServiceSDK__MultiModal__WebAPI InferenceModality
