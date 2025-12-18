@@ -21,8 +21,9 @@ flowchart LR
       class BrowserApplication_WebPage_TextToText InferenceModality
 
 
-      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
-      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL  --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux  --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux -.-> BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs
 
       BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_MultiModal
       class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
@@ -34,6 +35,7 @@ flowchart LR
       subgraph BrowserApplication_WebPage_Adapter[Adapter]
         subgraph BrowserApplication_WebPage_Adapter_TextToImage[Text-To-Image]
           BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI[SDXL <-> Stability AI]
+          BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs[Flux <-> Black Forest Labs]
         end
         class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
 
@@ -48,7 +50,8 @@ flowchart LR
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI --> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
+    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     --> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
+    BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs --> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
 
     BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
     class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
@@ -60,6 +63,7 @@ flowchart LR
     subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
       subgraph BrowserApplication_WebServiceSDK_API_TextToImage[Text-To-Image]
         BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI[Stability AI]
+        BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs[Black Forest Labs]
       end
       class BrowserApplication_WebServiceSDK_API_TextToImage InferenceModality
 
