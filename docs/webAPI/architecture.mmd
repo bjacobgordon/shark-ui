@@ -153,6 +153,7 @@ flowchart LR
     subgraph RemoteApplication_WebService[Web Service]
       subgraph RemoteApplication_WebService_TextToImage[Text-To-Image]
         RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
+        RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux[Shortfin v0 for Flux]
       end
       class RemoteApplication_WebService_TextToImage InferenceModality
 
@@ -166,6 +167,7 @@ flowchart LR
 
 
     RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL
+    RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux
 
     RemoteApplication_WebService_MultiModal RemoteApplication_WebService__MultiModal__RemoteApplication_InferencePipeline_API@--> RemoteApplication_InferencePipeline_API_MultiModal
     class RemoteApplication_WebService__MultiModal__RemoteApplication_InferencePipeline_API InferenceModality
