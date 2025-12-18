@@ -206,14 +206,16 @@ flowchart LR
 
 
     subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
+      subgraph RemoteApplication_InferencePipeline_MultiModal[Multi-Modal]
+        RemoteApplication_InferencePipeline_MultiModal_Unknown[?]
+      end
+      class RemoteApplication_InferencePipeline_MultiModal InferenceModality
+
       subgraph RemoteApplication_InferencePipeline_TextToImage[Text-To-Image]
         RemoteApplication_InferencePipeline_TextToImage_SDXL[v0 SDXL]
         RemoteApplication_InferencePipeline_TextToImage_Flux[v0 Flux]
       end
       class RemoteApplication_InferencePipeline_TextToImage InferenceModality
-
-      RemoteApplication_InferencePipeline_MultiModal[Multi-Modal]
-      class RemoteApplication_InferencePipeline_MultiModal InferenceModality
 
       RemoteApplication_InferencePipeline_TextToText[Text-To-Text]
       class RemoteApplication_InferencePipeline_TextToText InferenceModality
