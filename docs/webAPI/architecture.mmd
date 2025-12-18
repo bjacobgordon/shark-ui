@@ -21,9 +21,8 @@ flowchart LR
       class BrowserApplication_WebPage_TextToText InferenceModality
 
 
-      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL  --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
-      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux  --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
-      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux -.-> BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux --> BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs
 
       BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_MultiModal
       class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
