@@ -189,7 +189,9 @@ flowchart LR
       RemoteApplication_InferencePipeline_API_MultiModal[Multi-Modal]
       class RemoteApplication_InferencePipeline_API_MultiModal InferenceModality
 
-      RemoteApplication_InferencePipeline_API_TextToText[Text-To-Text]
+      subgraph RemoteApplication_InferencePipeline_API_TextToText[Text-To-Text]
+        RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM[Shortfin v0 for LLM]
+      end
       class RemoteApplication_InferencePipeline_API_TextToText InferenceModality
     end
     class RemoteApplication_InferencePipeline_API Contract
@@ -201,8 +203,7 @@ flowchart LR
     RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_MultiModal
     class RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline InferenceModality
 
-    RemoteApplication_InferencePipeline_API_TextToText RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToText
-    class RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline InferenceModality
+    RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM --> RemoteApplication_InferencePipeline_TextToText_Llama
 
 
     subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
