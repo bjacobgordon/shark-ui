@@ -17,9 +17,7 @@ flowchart LR
       class BrowserApplication_WebPage_TextToText InferenceModality
 
 
-      BrowserApplication_WebPage_TextToImage BrowserApplication_WebPage__TextToImage__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_TextToImage
-      class BrowserApplication_WebPage_TextToImage InferenceModality
-      class BrowserApplication_WebPage__TextToImage__BrowserApplication_WebPage_Adapter InferenceModality
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection --> BrowserApplication_WebPage_Adapter_TextToImage_PipelineConfigSection_StabilityAI
 
       BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_MultiModal
       class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
@@ -29,7 +27,9 @@ flowchart LR
 
 
       subgraph BrowserApplication_WebPage_Adapter[Adapter]
-        BrowserApplication_WebPage_Adapter_TextToImage[Text-To-Image]
+        subgraph BrowserApplication_WebPage_Adapter_TextToImage[Text-To-Image]
+          BrowserApplication_WebPage_Adapter_TextToImage_PipelineConfigSection_StabilityAI[Pipeline Config Section <-> Stability AI]
+        end
         class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
 
         BrowserApplication_WebPage_Adapter_MultiModal[Multi-Modal]
@@ -43,8 +43,7 @@ flowchart LR
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToImage
-    class BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API InferenceModality
+    BrowserApplication_WebPage_Adapter_TextToImage_PipelineConfigSection_StabilityAI --> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
 
     BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
     class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
