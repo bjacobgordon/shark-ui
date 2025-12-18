@@ -5,7 +5,9 @@ flowchart LR
 
   subgraph BrowserApplication[Browser Application]
     subgraph BrowserApplication_WebPage[Web Page]
-      BrowserApplication_WebPage_TextToImage[Text-To-Image]
+      subgraph BrowserApplication_WebPage_TextToImage[Text-To-Image]
+        BrowserApplication_WebPage_TextToImage_PipelineConfigSection[Pipeline Config Section]
+      end
       class BrowserApplication_WebPage_TextToImage InferenceModality
 
       BrowserApplication_WebPage_MultiModal[Multi-Modal]
@@ -18,6 +20,7 @@ flowchart LR
 
 
     BrowserApplication_WebPage_TextToImage BrowserApplication_WebPage__TextToImage__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToImage
+    class BrowserApplication_WebPage_TextToImage InferenceModality
     class BrowserApplication_WebPage__TextToImage__BrowserApplication_WebServiceSDK_API InferenceModality
 
     BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
