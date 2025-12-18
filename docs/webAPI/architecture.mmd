@@ -8,6 +8,7 @@ flowchart LR
       subgraph BrowserApplication_WebPage_TextToImage[Text-To-Image]
         subgraph BrowserApplication_WebPage_TextToImage_PipelineConfigSection[Pipeline Config Section]
           BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL[SDXL]
+          BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux[Flux]
         end
         class BrowserApplication_WebPage_TextToImage_PipelineConfigSection ApplicationModule
       end
@@ -21,6 +22,7 @@ flowchart LR
 
 
       BrowserApplication_WebPage_TextToImage_PipelineConfigSection_SDXL --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
+      BrowserApplication_WebPage_TextToImage_PipelineConfigSection_Flux --> BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI
 
       BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_MultiModal
       class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
