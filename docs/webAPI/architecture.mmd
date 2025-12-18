@@ -113,6 +113,7 @@ flowchart LR
 
 
       subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
+        BrowserApplication_WebServiceSDK_TextToImage_StabilityAI[Stability AI]
         BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0[Shortfin v0]
       end
       class BrowserApplication_WebServiceSDK_TextToImage InferenceModality
@@ -127,6 +128,7 @@ flowchart LR
   end
 
 
+  BrowserApplication_WebServiceSDK_TextToImage_StabilityAI --> WebAPI_TextToImage_StabilityAI
   BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0 --> WebAPI_TextToImage_Shortfin_v0_SDXL
   BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0 --> WebAPI_TextToImage_Shortfin_v0_Flux
 
