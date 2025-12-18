@@ -136,7 +136,9 @@ flowchart LR
     WebAPI_MultiModal[Multi-Modal]
     class WebAPI_MultiModal InferenceModality
 
-    WebAPI_TextToText[Text-To-Text]
+    subgraph WebAPI_TextToText[Text-To-Text]
+      WebAPI_TextToText_Shortfin_v0_LLM[Shortfin v0 for LLM]
+    end
     class WebAPI_TextToText InferenceModality
   end
   class WebAPI Contract
@@ -148,8 +150,7 @@ flowchart LR
   WebAPI_MultiModal WebAPI__MultiModal__RemoteApplication_WebService@--> RemoteApplication_WebService_MultiModal
   class WebAPI__MultiModal__RemoteApplication_WebService InferenceModality
 
-  WebAPI_TextToText WebAPI__TextToText__RemoteApplication_WebService@--> RemoteApplication_WebService_TextToText
-  class WebAPI__TextToText__RemoteApplication_WebService InferenceModality
+  WebAPI_TextToText_Shortfin_v0_LLM   --> RemoteApplication_WebService_TextToText_Shortfin_v0_LLM
 
 
   subgraph RemoteApplication[Remote Application]
