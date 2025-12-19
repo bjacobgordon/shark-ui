@@ -169,6 +169,7 @@ flowchart LR
   WebAPI_TextToImage_StabilityAI      --> RemoteApplication_WebService_TextToImage_StabilityAI
   WebAPI_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL
   WebAPI_TextToImage_Shortfin_v0_Flux --> RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux
+  WebAPI_TextToImage_BlackForestLabs  --> RemoteApplication_WebService_TextToImage_BlackForestLabs
 
   WebAPI_MultiModal WebAPI__MultiModal__RemoteApplication_WebService@--> RemoteApplication_WebService_MultiModal
   class WebAPI__MultiModal__RemoteApplication_WebService InferenceModality
@@ -182,6 +183,7 @@ flowchart LR
         RemoteApplication_WebService_TextToImage_StabilityAI[Stability AI]
         RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
         RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux[Shortfin v0 for Flux]
+        RemoteApplication_WebService_TextToImage_BlackForestLabs[Black Forest Labs]
       end
       class RemoteApplication_WebService_TextToImage InferenceModality
 
