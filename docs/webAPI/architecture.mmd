@@ -166,7 +166,9 @@ flowchart LR
     end
     class WebAPI_TextToImage InferenceModality
 
-    WebAPI_MultiModal[Multi-Modal]
+    subgraph WebAPI_MultiModal[Multi-Modal]
+      WebAPI_MultiModal_OpenAI[OpenAI]
+    end
     class WebAPI_MultiModal InferenceModality
 
     subgraph WebAPI_TextToText[Text-To-Text]
