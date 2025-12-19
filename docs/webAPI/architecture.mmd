@@ -17,7 +17,9 @@ flowchart LR
       BrowserApplication_WebPage_MultiModal[Multi-Modal]
       class BrowserApplication_WebPage_MultiModal InferenceModality
 
-      BrowserApplication_WebPage_TextToText[Text-To-Text]
+      subgraph BrowserApplication_WebPage_TextToText[Text-To-Text]
+        BrowserApplication_WebPage_TextToText_Chat[Chat]
+      end
       class BrowserApplication_WebPage_TextToText InferenceModality
 
 
@@ -28,6 +30,7 @@ flowchart LR
       class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
 
       BrowserApplication_WebPage_TextToText BrowserApplication_WebPage__TextToText__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_TextToText
+      class BrowserApplication_WebPage_TextToText InferenceModality
       class BrowserApplication_WebPage__TextToText__BrowserApplication_WebPage_Adapter InferenceModality
 
 
