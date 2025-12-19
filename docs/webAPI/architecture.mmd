@@ -76,7 +76,7 @@ flowchart LR
 
 
     BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI     --- BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip
-    BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs --> BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0
+    BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs --> BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction
 
     BrowserApplication_WebServiceSDK_API_MultiModal BrowserApplication_WebServiceSDK_API__MultiModal__BrowserApplication_WebServiceSDK_Shim@---> BrowserApplication_WebServiceSDK_Shim_MultiModal
     class BrowserApplication_WebServiceSDK_API__MultiModal__BrowserApplication_WebServiceSDK_Shim InferenceModality
@@ -89,6 +89,10 @@ flowchart LR
       subgraph BrowserApplication_WebServiceSDK_Shim[Shim]
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
           BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip@{ shape: f-circ }
+          BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction@{ shape: f-circ }
+
+          BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0
+
           BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0[Black Forest Labs <-> Shortfin v0]
         end
         class BrowserApplication_WebServiceSDK_Shim_TextToImage InferenceModality
@@ -104,6 +108,7 @@ flowchart LR
 
       BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip            --> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
       BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0 --> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction   -.-> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
       BrowserApplication_WebServiceSDK_Shim_MultiModal BrowserApplication_WebServiceSDK_Shim__MultiModal__BrowserApplication_WebServiceSDK@--> BrowserApplication_WebServiceSDK_MultiModal
       class BrowserApplication_WebServiceSDK_Shim__MultiModal__BrowserApplication_WebServiceSDK InferenceModality
