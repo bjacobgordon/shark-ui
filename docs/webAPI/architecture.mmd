@@ -90,7 +90,7 @@ flowchart LR
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
           BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Junction@{ shape: f-circ }
 
-          BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAIToShortfinV0
+          BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Junction -.-> BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAIToShortfinV0
 
           BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAIToShortfinV0[Stability AI <-> Shortfin v0]
           BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0[Black Forest Labs <-> Shortfin v0]
@@ -106,7 +106,7 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Junction       -.-> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Junction        --> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
       BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAIToShortfinV0     --> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
       BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0 --> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
 
