@@ -68,7 +68,9 @@ flowchart LR
       end
       class BrowserApplication_WebServiceSDK_API_TextToImage InferenceModality
 
-      BrowserApplication_WebServiceSDK_API_MultiModal[Multi-Modal]
+      subgraph BrowserApplication_WebServiceSDK_API_MultiModal[Multi-Modal]
+        BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI[OpenAI]
+      end
       class BrowserApplication_WebServiceSDK_API_MultiModal InferenceModality
 
       subgraph BrowserApplication_WebServiceSDK_API_TextToText[Text-To-Text]
