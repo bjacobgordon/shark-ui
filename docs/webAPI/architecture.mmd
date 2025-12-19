@@ -106,9 +106,9 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip            --> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0 --> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction    --> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip             --> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabsToShortfinV0 -.-> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Junction     --> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
       BrowserApplication_WebServiceSDK_Shim_MultiModal BrowserApplication_WebServiceSDK_Shim__MultiModal__BrowserApplication_WebServiceSDK@--> BrowserApplication_WebServiceSDK_MultiModal
       class BrowserApplication_WebServiceSDK_Shim__MultiModal__BrowserApplication_WebServiceSDK InferenceModality
