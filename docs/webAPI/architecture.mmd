@@ -184,8 +184,7 @@ flowchart LR
   WebAPI_TextToImage_Shortfin_v0_Flux --> RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux
   WebAPI_TextToImage_BlackForestLabs  --> RemoteApplication_WebService_TextToImage_BlackForestLabs
 
-  WebAPI_MultiModal WebAPI__MultiModal__RemoteApplication_WebService@--> RemoteApplication_WebService_MultiModal
-  class WebAPI__MultiModal__RemoteApplication_WebService InferenceModality
+  WebAPI_MultiModal_OpenAI            --> RemoteApplication_WebService_MultiModal_OpenAI
 
   WebAPI_TextToText_Shortfin_v0_LLM   --> RemoteApplication_WebService_TextToText_Shortfin_v0_LLM
 
@@ -200,7 +199,9 @@ flowchart LR
       end
       class RemoteApplication_WebService_TextToImage InferenceModality
 
-      RemoteApplication_WebService_MultiModal[Multi-Modal]
+      subgraph RemoteApplication_WebService_MultiModal[Multi-Modal]
+        RemoteApplication_WebService_MultiModal_OpenAI[OpenAI]
+      end
       class RemoteApplication_WebService_MultiModal InferenceModality
 
       subgraph RemoteApplication_WebService_TextToText[Text-To-Text]
@@ -212,6 +213,7 @@ flowchart LR
       RemoteApplication_WebService_TextToImage_BlackForestLabs --> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs
 
       RemoteApplication_WebService_MultiModal RemoteApplication_WebService__MultiModal__RemoteApplication_WebService_Adapter@--> RemoteApplication_WebService_Adapter_MultiModal
+      class RemoteApplication_WebService_MultiModal InferenceModality
       class RemoteApplication_WebService__MultiModal__RemoteApplication_WebService_Adapter InferenceModality
 
       RemoteApplication_WebService_TextToText_Shortfin_v0_LLM  --- RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip
