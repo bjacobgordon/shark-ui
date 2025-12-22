@@ -44,10 +44,6 @@ flowchart LR
 
         subgraph BrowserApplication_WebPage_Adapter_TextToText[Text-To-Text]
           BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI[Chat <-> OpenAI]
-
-          BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM
-
-          BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM[OpenAI <-> Shortfin v0 for LLM]
         end
         class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
       end
@@ -56,14 +52,19 @@ flowchart LR
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     ----> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
-    BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs ----> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
+    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     --> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
+    BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs --> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
 
-    BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@----> BrowserApplication_WebServiceSDK_API_MultiModal
+
+    BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
     class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
 
-    BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI             --> BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI
-    BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM    --> BrowserApplication_WebServiceSDK_API_TextToText_Shortfin_v0_LLM
+
+    BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI           --> BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI
+
+    BrowserApplication_WebPage_Adapter_TextToText BrowserApplication_WebPage_Adapter__TextToText__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToText
+    class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
+    class BrowserApplication_WebPage_Adapter__TextToText__BrowserApplication_WebServiceSDK_API InferenceModality
 
 
     subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
@@ -78,9 +79,7 @@ flowchart LR
       end
       class BrowserApplication_WebServiceSDK_API_MultiModal InferenceModality
 
-      subgraph BrowserApplication_WebServiceSDK_API_TextToText[Text-To-Text]
-        BrowserApplication_WebServiceSDK_API_TextToText_Shortfin_v0_LLM[Shortfin v0 for LLM]
-      end
+      BrowserApplication_WebServiceSDK_API_TextToText[Text-To-Text]
       class BrowserApplication_WebServiceSDK_API_TextToText InferenceModality
     end
     class BrowserApplication_WebServiceSDK_API Contract
@@ -89,11 +88,15 @@ flowchart LR
     BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI     --- BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip
     BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs --- BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Skip
 
+
     BrowserApplication_WebServiceSDK_API_MultiModal BrowserApplication_WebServiceSDK_API__MultiModal__BrowserApplication_WebServiceSDK_Shim@--> BrowserApplication_WebServiceSDK_Shim_MultiModal
     class BrowserApplication_WebServiceSDK_API__MultiModal__BrowserApplication_WebServiceSDK_Shim InferenceModality
 
+
     BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI          <--> BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM
-    BrowserApplication_WebServiceSDK_API_TextToText_Shortfin_v0_LLM  --- BrowserApplication_WebServiceSDK_Shim_TextToText_Shortfin_v0_LLM_Skip
+
+    BrowserApplication_WebServiceSDK_API_TextToText BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim@--> BrowserApplication_WebServiceSDK_Shim_TextToText
+    class BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim InferenceModality
 
 
     subgraph BrowserApplication_WebServiceSDK[Web Service SDK]
@@ -109,7 +112,6 @@ flowchart LR
 
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToText[Text-To-Text]
           BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM[OpenAI <-> Shortfin v0 for LLM]
-          BrowserApplication_WebServiceSDK_Shim_TextToText_Shortfin_v0_LLM_Skip@{ shape: f-circ }
         end
         class BrowserApplication_WebServiceSDK_Shim_TextToText InferenceModality
       end
@@ -123,7 +125,6 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim__MultiModal__BrowserApplication_WebServiceSDK InferenceModality
 
       BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM <--> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
-      BrowserApplication_WebServiceSDK_Shim_TextToText_Shortfin_v0_LLM_Skip  --> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
 
 
       subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
