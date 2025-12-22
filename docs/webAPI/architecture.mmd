@@ -212,7 +212,7 @@ flowchart LR
       RemoteApplication_WebService_TextToImage_StabilityAI     --> RemoteApplication_WebService_Adapter_TextToImage_StabilityAI
       RemoteApplication_WebService_TextToImage_BlackForestLabs --> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs
 
-      RemoteApplication_WebService_MultiModal_OpenAI           --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI
+      RemoteApplication_WebService_MultiModal_OpenAI           --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM
 
       RemoteApplication_WebService_TextToText_Shortfin_v0_LLM  --- RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip
 
@@ -231,17 +231,26 @@ flowchart LR
         end
         class RemoteApplication_WebService_Adapter_TextToImage InferenceModality
 
+
         subgraph RemoteApplication_WebService_Adapter_MultiModal[Multi-Modal]
           subgraph RemoteApplication_WebService_Adapter_MultiModal_OpenAI[OpenAI]
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM[Shortfin v0 LLM]
           end
           class RemoteApplication_WebService_Adapter_MultiModal_OpenAI ApplicationModule
         end
         class RemoteApplication_WebService_Adapter_MultiModal InferenceModality
 
+
         subgraph RemoteApplication_WebService_Adapter_TextToText[Text-To-Text]
           RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip@{ shape: f-circ }
         end
         class RemoteApplication_WebService_Adapter_TextToText InferenceModality
+
+
+        RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM  --> RemoteApplication_WebService_Adapter_Junction_v0_LLM
+        RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip  --> RemoteApplication_WebService_Adapter_Junction_v0_LLM
+
+        RemoteApplication_WebService_Adapter_Junction_v0_LLM@{ shape: f-circ }
       end
       class RemoteApplication_WebService_Adapter ApplicationModule
     end
@@ -255,7 +264,7 @@ flowchart LR
     class RemoteApplication_WebService_Adapter_MultiModal InferenceModality
     class RemoteApplication_WebService_Adapter__MultiModal__RemoteApplication_InferencePipeline_API InferenceModality
 
-    RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip  ---> RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM
+    RemoteApplication_WebService_Adapter_Junction_v0_LLM                   --> RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM
 
 
     subgraph RemoteApplication_InferencePipeline_API[Inference Pipeline API]
