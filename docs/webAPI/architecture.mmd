@@ -114,7 +114,7 @@ flowchart LR
     BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI         --- BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip
 
 
-    BrowserApplication_WebServiceSDK_API_MultiModal_Shortfin_vNext --> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM
+    BrowserApplication_WebServiceSDK_API_MultiModal_Shortfin_vNext --> BrowserApplication_WebServiceSDK_Junction_ShortfinVNext
 
     BrowserApplication_WebServiceSDK_API_TextToText BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim@--> BrowserApplication_WebServiceSDK_Shim_TextToText
     class BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim InferenceModality
@@ -122,13 +122,26 @@ flowchart LR
 
     subgraph BrowserApplication_WebServiceSDK[Web Service SDK]
       subgraph BrowserApplication_WebServiceSDK_Shim[Shim]
-        BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
+        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext@{ shape: f-circ }
+
+        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0
+        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext --> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM
+
+
+        subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
+          subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext[Shortfin vNext]
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0[Shortfin v0]
+          end
+          class BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext ApplicationModule
+        end
         class BrowserApplication_WebServiceSDK_Shim_TextToImage InferenceModality
+
 
         subgraph BrowserApplication_WebServiceSDK_Shim_MultiModal[Multi-Modal]
           BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip@{ shape: f-circ }
         end
         class BrowserApplication_WebServiceSDK_Shim_MultiModal InferenceModality
+
 
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToText[Text-To-Text]
           BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM[Shortfin vNext <-> v0 for LLM]
@@ -138,8 +151,7 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage BrowserApplication_WebServiceSDK_Shim__TextToImage__BrowserApplication_WebServiceSDK_TextToImage@--> BrowserApplication_WebServiceSDK_TextToImage
-      class BrowserApplication_WebServiceSDK_Shim__TextToImage__BrowserApplication_WebServiceSDK_TextToImage InferenceModality
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0   -.-> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
 
       BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip                  --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
 
