@@ -88,11 +88,7 @@ flowchart LR
     BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI     --- BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip
     BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs --- BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Skip
 
-
     BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI           --- BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip
-
-
-    BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI         <-.-> BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM
 
     BrowserApplication_WebServiceSDK_API_TextToText BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim@--> BrowserApplication_WebServiceSDK_Shim_TextToText
     class BrowserApplication_WebServiceSDK_API__TextToText__BrowserApplication_WebServiceSDK_Shim InferenceModality
@@ -111,9 +107,7 @@ flowchart LR
         end
         class BrowserApplication_WebServiceSDK_Shim_MultiModal InferenceModality
 
-        subgraph BrowserApplication_WebServiceSDK_Shim_TextToText[Text-To-Text]
-          BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM[OpenAI <-> Shortfin v0 for LLM]
-        end
+        BrowserApplication_WebServiceSDK_Shim_TextToText[Text-To-Text]
         class BrowserApplication_WebServiceSDK_Shim_TextToText InferenceModality
       end
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
@@ -124,7 +118,8 @@ flowchart LR
 
       BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip           --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
 
-      BrowserApplication_WebServiceSDK_Shim_TextToText_OpenAI_ShortfinV0LLM <--> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
+      BrowserApplication_WebServiceSDK_Shim_TextToText BrowserApplication_WebServiceSDK_Shim__TextToText__BrowserApplication_WebServiceSDK@--> BrowserApplication_WebServiceSDK_TextToText
+      class BrowserApplication_WebServiceSDK_Shim__TextToText__BrowserApplication_WebServiceSDK InferenceModality
 
 
       subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
