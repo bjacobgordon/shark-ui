@@ -217,6 +217,7 @@ flowchart LR
   WebAPI_TextToImage_BlackForestLabs  --> RemoteApplication_WebService_TextToImage_BlackForestLabs
 
   WebAPI_MultiModal_OpenAI            --> RemoteApplication_WebService_MultiModal_OpenAI
+  WebAPI_MultiModal_Shortfin_v1       --> RemoteApplication_WebService_MultiModal_Shortfin_v1
 
   WebAPI_TextToText_Shortfin_v0_LLM   --> RemoteApplication_WebService_TextToText_Shortfin_v0_LLM
 
@@ -233,6 +234,7 @@ flowchart LR
 
       subgraph RemoteApplication_WebService_MultiModal[Multi-Modal]
         RemoteApplication_WebService_MultiModal_OpenAI[OpenAI]
+        RemoteApplication_WebService_MultiModal_Shortfin_v1[Shortfin v1]
       end
       class RemoteApplication_WebService_MultiModal InferenceModality
 
