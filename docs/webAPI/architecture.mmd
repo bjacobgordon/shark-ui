@@ -159,6 +159,7 @@ flowchart LR
 
       subgraph BrowserApplication_WebServiceSDK_MultiModal[Multi-Modal]
         BrowserApplication_WebServiceSDK_MultiModal_OpenAI[OpenAI]
+        BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1[Shortfin v1]
       end
       class BrowserApplication_WebServiceSDK_MultiModal InferenceModality
 
@@ -177,6 +178,7 @@ flowchart LR
   BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs --> WebAPI_TextToImage_BlackForestLabs
 
   BrowserApplication_WebServiceSDK_MultiModal_OpenAI           --> WebAPI_MultiModal_OpenAI
+  BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1      --> WebAPI_MultiModal_Shortfin_v1
 
   BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM  --> WebAPI_TextToText_Shortfin_v0_LLM
 
