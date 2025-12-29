@@ -297,16 +297,43 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API Contract
 
 
-    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL ---> RemoteApplication_InferencePipeline_TextToImage_SDXL
-    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux ---> RemoteApplication_InferencePipeline_TextToImage_Flux
+    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL --- RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip
+    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux --- RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip
 
-    RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@---> RemoteApplication_InferencePipeline_MultiModal
+    RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_Adapter_MultiModal
     class RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline InferenceModality
 
-    RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM    --> RemoteApplication_InferencePipeline_TextToText_Junction_v0
+    RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM   --- RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip
 
 
     subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
+      subgraph RemoteApplication_InferencePipeline_Adapter[Adapter]
+        subgraph RemoteApplication_InferencePipeline_Adapter_TextToImage[Text-To-Image]
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip@{ shape: f-circ }
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip@{ shape: f-circ }
+        end
+        class RemoteApplication_InferencePipeline_Adapter_TextToImage InferenceModality
+
+        RemoteApplication_InferencePipeline_Adapter_MultiModal[Multi-Modal]
+        class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
+
+        subgraph RemoteApplication_InferencePipeline_Adapter_TextToText[Text-To-Text]
+          RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip@{ shape: f-circ }
+        end
+        class RemoteApplication_InferencePipeline_Adapter_TextToText InferenceModality
+      end
+      class RemoteApplication_InferencePipeline_Adapter ApplicationModule
+
+
+      RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip        ---> RemoteApplication_InferencePipeline_TextToImage_SDXL
+      RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip        ---> RemoteApplication_InferencePipeline_TextToImage_Flux
+
+      RemoteApplication_InferencePipeline_Adapter_MultiModal RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline@---> RemoteApplication_InferencePipeline_MultiModal
+      class RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline InferenceModality
+
+      RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip --> RemoteApplication_InferencePipeline_TextToText_Junction_v0
+
+
       subgraph RemoteApplication_InferencePipeline_TextToText[Text-To-Text]
         RemoteApplication_InferencePipeline_TextToText_Junction_v0@{ shape: f-circ }
 
