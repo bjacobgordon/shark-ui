@@ -284,7 +284,9 @@ flowchart LR
       end
       class RemoteApplication_InferencePipeline_API_TextToImage InferenceModality
 
-      RemoteApplication_InferencePipeline_API_MultiModal[Multi-Modal]
+      subgraph RemoteApplication_InferencePipeline_API_MultiModal[Multi-Modal]
+        RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1[Shortfin v1]
+      end
       class RemoteApplication_InferencePipeline_API_MultiModal InferenceModality
 
       subgraph RemoteApplication_InferencePipeline_API_TextToText[Text-To-Text]
