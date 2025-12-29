@@ -267,14 +267,12 @@ flowchart LR
     class RemoteApplication_WebService ApplicationModule
 
 
-    RemoteApplication_WebService_Adapter_Junction_v0_SDXL --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL
-    RemoteApplication_WebService_Adapter_Junction_v0_Flux --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux
+    RemoteApplication_WebService_Adapter_Junction_v0_SDXL                --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL
+    RemoteApplication_WebService_Adapter_Junction_v0_Flux                --> RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux
 
-    RemoteApplication_WebService_Adapter_MultiModal RemoteApplication_WebService_Adapter__MultiModal__RemoteApplication_InferencePipeline_API@--> RemoteApplication_InferencePipeline_API_MultiModal
-    class RemoteApplication_WebService_Adapter_MultiModal InferenceModality
-    class RemoteApplication_WebService_Adapter__MultiModal__RemoteApplication_InferencePipeline_API InferenceModality
+    RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction -.-> RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1
 
-    RemoteApplication_WebService_Adapter_Junction_v0_LLM  --> RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM
+    RemoteApplication_WebService_Adapter_Junction_v0_LLM                 --> RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM
 
 
     subgraph RemoteApplication_InferencePipeline_API[Inference Pipeline API]
@@ -301,6 +299,7 @@ flowchart LR
     RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux --- RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip
 
     RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_Adapter_MultiModal
+    class RemoteApplication_InferencePipeline_API_MultiModal InferenceModality
     class RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline InferenceModality
 
     RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM   --- RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip
