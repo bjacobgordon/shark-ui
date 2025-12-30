@@ -273,12 +273,11 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API Contract
 
 
-    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL ---- RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip
-    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux ---- RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip
+    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_SDXL --- RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip
+    RemoteApplication_InferencePipeline_API_TextToImage_Shortfin_v0_Flux --- RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip
 
-    RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1        --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction
 
-    RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM   ---- RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip
+    RemoteApplication_InferencePipeline_API_TextToText_Shortfin_v0_LLM   --- RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip
 
 
     subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
@@ -286,6 +285,17 @@ flowchart LR
         subgraph RemoteApplication_InferencePipeline_Adapter_TextToImage[Text-To-Image]
           RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip@{ shape: f-circ }
           RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip@{ shape: f-circ }
+
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip -.-> RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_Flux_Skip -.-> RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
+
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1[v0 for SDXL <-> v1]
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1[v0 for Flux <-> v1]
+
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1 --> RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1 --> RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV1_Junction
+
+          RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV1_Junction@{ shape: f-circ }
         end
         class RemoteApplication_InferencePipeline_Adapter_TextToImage InferenceModality
 
@@ -306,8 +316,23 @@ flowchart LR
 
         subgraph RemoteApplication_InferencePipeline_Adapter_TextToText[Text-To-Text]
           RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip@{ shape: f-circ }
+
+          RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_Skip -.-> RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_ShortfinV1
+
+          RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_ShortfinV1[v0 for LLM <-> v1]
         end
         class RemoteApplication_InferencePipeline_Adapter_TextToText InferenceModality
+
+
+        RemoteApplication_InferencePipeline_Adapter_TextToImage_ShortfinV1_Junction      --> RemoteApplication_InferencePipeline_Adapter_Junction_V1
+        RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1                   --> RemoteApplication_InferencePipeline_Adapter_Junction_V1
+        RemoteApplication_InferencePipeline_Adapter_TextToText_ShortfinV0LLM_ShortfinV1 ---> RemoteApplication_InferencePipeline_Adapter_Junction_V1
+
+
+        RemoteApplication_InferencePipeline_Adapter_Junction_V1@{ shape: f-circ }
+
+
+        RemoteApplication_InferencePipeline_Adapter_Junction_V1 --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction
 
 
         RemoteApplication_InferencePipeline_Adapter_TextToImage_SDXL_Skip                --> RemoteApplication_InferencePipeline_Adapter_Junction_TextToImage_V0_SDXL
