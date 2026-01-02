@@ -124,13 +124,21 @@ flowchart LR
       subgraph BrowserApplication_WebServiceSDK_Shim[Shim]
         BrowserApplication_WebServiceSDK_Junction_ShortfinVNext@{ shape: f-circ }
 
-        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0
-        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext --> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM
+        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext  --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_Junction
+        BrowserApplication_WebServiceSDK_Junction_ShortfinVNext ---> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM
 
 
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
           subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext[Shortfin vNext]
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_Junction@{ shape: f-circ }
+
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_StabilityAI
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_BlackForestLabs
+
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_StabilityAI[Stability AI]
             BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0[Shortfin v0]
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_BlackForestLabs[Black Forest Labs]
           end
           class BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext ApplicationModule
         end
@@ -151,11 +159,13 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0   -.-> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_StabilityAI     -.-> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_ShortfinV0      -.-> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinVNext_BlackForestLabs -.-> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
-      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip                  --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
+      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip                     --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
 
-      BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM -.-> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
+      BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinVNext_ShortfinV0LLM    -.-> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
 
 
       subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
