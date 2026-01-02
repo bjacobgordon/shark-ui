@@ -190,8 +190,6 @@ flowchart LR
       end
       class RemoteApplication_WebService_TextToText InferenceModality
 
-      RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL --- RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
-      RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux --- RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
 
       RemoteApplication_WebService_MultiModal RemoteApplication_WebService__MultiModal__RemoteApplication_WebService_Adapter@--> RemoteApplication_WebService_Adapter_MultiModal
       class RemoteApplication_WebService__MultiModal__RemoteApplication_WebService_Adapter InferenceModality
@@ -200,6 +198,9 @@ flowchart LR
 
       subgraph RemoteApplication_WebService_Adapter[Adapter]
         subgraph RemoteApplication_WebService_Adapter_TextToImage[Text-To-Image]
+          RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL --- RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
+          RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux --- RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
+
           RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip@{ shape: f-circ }
           RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip@{ shape: f-circ }
         end
