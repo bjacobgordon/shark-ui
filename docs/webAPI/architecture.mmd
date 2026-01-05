@@ -243,12 +243,12 @@ flowchart LR
       end
       class RemoteApplication_WebService_TextToText InferenceModality
 
-      RemoteApplication_WebService_TextToImage_StabilityAI     ---> RemoteApplication_WebService_Adapter_TextToImage_StabilityAI
-      RemoteApplication_WebService_TextToImage_BlackForestLabs ---> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs
+      RemoteApplication_WebService_TextToImage_StabilityAI     -----> RemoteApplication_WebService_Adapter_TextToImage_StabilityAI
+      RemoteApplication_WebService_TextToImage_BlackForestLabs -----> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs
 
-      RemoteApplication_WebService_MultiModal_OpenAI            --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native
+      RemoteApplication_WebService_MultiModal_Shortfin_v1         --> RemoteApplication_WebService_Adapter_MultiModal_Adapter_OpenAI_ShortfinV1
 
-      RemoteApplication_WebService_TextToText_Shortfin_v0_LLM  ---- RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip
+      RemoteApplication_WebService_TextToText_Shortfin_v0_LLM  ------ RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip
 
       subgraph RemoteApplication_WebService_Adapter[Adapter]
         subgraph RemoteApplication_WebService_Adapter_TextToImage[Text-To-Image]
@@ -267,6 +267,15 @@ flowchart LR
 
 
         subgraph RemoteApplication_WebService_Adapter_MultiModal[Multi-Modal]
+          RemoteApplication_WebService_Adapter_MultiModal_Adapter_OpenAI_ShortfinV1[Shortfin v1 <-> OpenAI]
+
+          RemoteApplication_WebService_MultiModal_OpenAI                            --> RemoteApplication_WebService_Adapter_MultiModal_Junction
+          RemoteApplication_WebService_Adapter_MultiModal_Adapter_OpenAI_ShortfinV1 --> RemoteApplication_WebService_Adapter_MultiModal_Junction
+
+          RemoteApplication_WebService_Adapter_MultiModal_Junction@{ shape: f-circ }
+
+          RemoteApplication_WebService_Adapter_MultiModal_Junction --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native
+
           subgraph RemoteApplication_WebService_Adapter_MultiModal_OpenAI[OpenAI]
             RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native@{ shape: f-circ }
 
