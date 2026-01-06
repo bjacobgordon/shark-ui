@@ -45,7 +45,7 @@ flowchart LR
         subgraph BrowserApplication_WebPage_Adapter_TextToText[Text-To-Text]
           BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM[Chat <-> Shortfin v0 LLM]
 
-          BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM -.-> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_OpenAI
+          BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM --> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_OpenAI
 
           BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_OpenAI[Shortfin v0 for LLM <-> OpenAI]
 
@@ -53,8 +53,8 @@ flowchart LR
 
           BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM[OpenAI <-> Shortfin v0 for LLM]
 
-          BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM -.-> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
-          BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM    --> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
+          BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM --> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
+          BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM  -.-> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
 
           BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction@{ shape: f-circ }
         end
