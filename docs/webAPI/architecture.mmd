@@ -39,8 +39,11 @@ flowchart LR
 
           BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
           BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
+          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinVNext
+          BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinVNext
 
           BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI@{ shape: f-circ }
+          BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinVNext[OpenAI <-> Shortfin vNext]
         end
         class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
 
@@ -58,9 +61,10 @@ flowchart LR
         end
         class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
 
-        BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI     --> BrowserApplication_WebPage_Adapter_Junction_OpenAI
-        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI         ---> BrowserApplication_WebPage_Adapter_Junction_OpenAI
-        BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinVNext --> BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext
+        BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI      --> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI          ---> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinVNext --> BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext
+        BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinVNext  --> BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext
 
         BrowserApplication_WebPage_Adapter_Junction_OpenAI@{ shape: f-circ }
         BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext@{ shape: f-circ }
