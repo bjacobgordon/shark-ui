@@ -15,19 +15,42 @@ flowchart LR
 
       BrowserApplication_WebPage_TextToText[Text-To-Text]
       class BrowserApplication_WebPage_TextToText InferenceModality
+
+
+      BrowserApplication_WebPage_TextToImage BrowserApplication_WebPage__TextToImage__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_TextToImage
+      class BrowserApplication_WebPage_TextToImage InferenceModality
+      class BrowserApplication_WebPage__TextToImage__BrowserApplication_WebPage_Adapter InferenceModality
+
+      BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_MultiModal
+      class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebPage_Adapter InferenceModality
+
+      BrowserApplication_WebPage_TextToText BrowserApplication_WebPage__TextToText__BrowserApplication_WebPage_Adapter@--> BrowserApplication_WebPage_Adapter_TextToText
+      class BrowserApplication_WebPage__TextToText__BrowserApplication_WebPage_Adapter InferenceModality
+
+
+      subgraph BrowserApplication_WebPage_Adapter[Adapter]
+        BrowserApplication_WebPage_Adapter_TextToImage[Text-To-Image]
+        class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
+
+        BrowserApplication_WebPage_Adapter_MultiModal[Multi-Modal]
+        class BrowserApplication_WebPage_Adapter_MultiModal InferenceModality
+
+        BrowserApplication_WebPage_Adapter_TextToText[Text-To-Text]
+        class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
+      end
+      class BrowserApplication_WebPage_Adapter ApplicationModule
     end
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_TextToImage BrowserApplication_WebPage__TextToImage__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToImage
-    class BrowserApplication_WebPage_TextToImage InferenceModality
-    class BrowserApplication_WebPage__TextToImage__BrowserApplication_WebServiceSDK_API InferenceModality
+    BrowserApplication_WebPage_Adapter_TextToImage BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToImage
+    class BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API InferenceModality
 
-    BrowserApplication_WebPage_MultiModal BrowserApplication_WebPage__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
-    class BrowserApplication_WebPage__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
+    BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_MultiModal
+    class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
 
-    BrowserApplication_WebPage_TextToText BrowserApplication_WebPage__TextToText__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToText
-    class BrowserApplication_WebPage__TextToText__BrowserApplication_WebServiceSDK_API InferenceModality
+    BrowserApplication_WebPage_Adapter_TextToText BrowserApplication_WebPage_Adapter__TextToText__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToText
+    class BrowserApplication_WebPage_Adapter__TextToText__BrowserApplication_WebServiceSDK_API InferenceModality
 
 
     subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
