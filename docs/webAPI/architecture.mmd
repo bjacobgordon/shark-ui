@@ -246,16 +246,15 @@ flowchart LR
 
 
         subgraph RemoteApplication_WebService_Adapter_MultiModal[Multi-Modal]
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native@{ shape: f-circ }
-
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM
-
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL[OpenAI <-> Shortfin v0 SDXL]
-          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux[OpenAI <-> Shortfin v0 Flux]
-
           subgraph RemoteApplication_WebService_Adapter_MultiModal_OpenAI[OpenAI]
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native@{ shape: f-circ }
+
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_Native --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM
+
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL[Shortfin v0 SDXL]
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux[Shortfin v0 Flux]
             RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM[Shortfin v0 LLM]
           end
           class RemoteApplication_WebService_Adapter_MultiModal_OpenAI ApplicationModule
