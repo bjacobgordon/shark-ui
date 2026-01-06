@@ -37,12 +37,16 @@ flowchart LR
           BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI[SDXL <-> Stability AI]
           BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs[Flux <-> Black Forest Labs]
 
+          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     --> BrowserApplication_WebPage_Adapter_TextToImage_StabilityAI_OpenAI
           BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs --> BrowserApplication_WebPage_Adapter_TextToImage_BlackForestLabs_OpenAI
 
+          BrowserApplication_WebPage_Adapter_TextToImage_StabilityAI_OpenAI[Stability AI <-> OpenAI]
           BrowserApplication_WebPage_Adapter_TextToImage_BlackForestLabs_OpenAI[Black Forest Labs <-> OpenAI]
 
+          BrowserApplication_WebPage_Adapter_TextToImage_StabilityAI_OpenAI     --> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_StabilityAI
           BrowserApplication_WebPage_Adapter_TextToImage_BlackForestLabs_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_BlackForestLabs
 
+          BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_StabilityAI[OpenAI <-> Stability AI]
           BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_BlackForestLabs[OpenAI <-> Black Forest Labs]
         end
         class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
@@ -60,7 +64,7 @@ flowchart LR
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     ----> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
+    BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_StabilityAI     --> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
     BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_BlackForestLabs --> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
 
 
