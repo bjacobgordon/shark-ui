@@ -52,11 +52,6 @@ flowchart LR
           BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_OpenAI --> BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM
 
           BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM[OpenAI <-> Shortfin v0 for LLM]
-
-          BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM --> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
-          BrowserApplication_WebPage_Adapter_TextToText_Chat_ShortfinV0LLM  -.-> BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction
-
-          BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction@{ shape: f-circ }
         end
         class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
       end
@@ -65,14 +60,14 @@ flowchart LR
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     -----> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
-    BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs -----> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
+    BrowserApplication_WebPage_Adapter_TextToImage_SDXL_StabilityAI     ----> BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI
+    BrowserApplication_WebPage_Adapter_TextToImage_Flux_BlackForestLabs ----> BrowserApplication_WebServiceSDK_API_TextToImage_BlackForestLabs
 
-    BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@-----> BrowserApplication_WebServiceSDK_API_MultiModal
+    BrowserApplication_WebPage_Adapter_MultiModal BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API@----> BrowserApplication_WebServiceSDK_API_MultiModal
     class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
 
 
-    BrowserApplication_WebPage_Adapter_TextToText_ShortfinV0LLM_Junction --> BrowserApplication_WebServiceSDK_API_TextToText_Shortfin_v0_LLM
+    BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV0LLM    --> BrowserApplication_WebServiceSDK_API_TextToText_Shortfin_v0_LLM
 
 
     subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
