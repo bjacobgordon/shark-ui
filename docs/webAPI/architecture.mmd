@@ -78,7 +78,9 @@ flowchart LR
 
 
   subgraph WebAPI[Web API]
-    WebAPI_TextToImage[Text-To-Image]
+    subgraph WebAPI_TextToImage[Text-To-Image]
+      WebAPI_TextToImage_Shortfin_v0_SDXL[Shortfin v0 for SDXL]
+    end
     class WebAPI_TextToImage InferenceModality
 
     WebAPI_MultiModal[Multi-Modal]
