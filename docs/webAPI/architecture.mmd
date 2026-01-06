@@ -37,10 +37,10 @@ flowchart LR
           BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI[SDXL <-> OpenAI]
           BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI[Flux <-> OpenAI]
 
-          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
-          BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
-          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1
-          BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1
+          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
+          BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI
+          BrowserApplication_WebPage_Adapter_TextToImage_SDXL_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1
+          BrowserApplication_WebPage_Adapter_TextToImage_Flux_OpenAI --> BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1
 
           BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI@{ shape: f-circ }
           BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1[OpenAI <-> Shortfin v1]
@@ -55,14 +55,14 @@ flowchart LR
         subgraph BrowserApplication_WebPage_Adapter_TextToText[Text-To-Text]
           BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI[Chat <-> OpenAI]
 
-          BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV1
+          BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI --> BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV1
 
           BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV1[OpenAI <-> Shortfin v1]
         end
         class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
 
         BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI   --> BrowserApplication_WebPage_Adapter_Junction_OpenAI
-        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI       ---> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI      -..-> BrowserApplication_WebPage_Adapter_Junction_OpenAI
         BrowserApplication_WebPage_Adapter_TextToImage_OpenAI_ShortfinV1 --> BrowserApplication_WebPage_Adapter_Junction_ShortfinV1
         BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinV1  --> BrowserApplication_WebPage_Adapter_Junction_ShortfinV1
 
@@ -111,7 +111,7 @@ flowchart LR
     class BrowserApplication_WebServiceSDK_API__TextToImage__BrowserApplication_WebServiceSDK_Shim InferenceModality
 
 
-    BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI      --- BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction
+    BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI      -.- BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction
 
 
     BrowserApplication_WebServiceSDK_API_MultiModal_Shortfin_v1 --> BrowserApplication_WebServiceSDK_Junction_ShortfinV1
@@ -149,7 +149,7 @@ flowchart LR
         subgraph BrowserApplication_WebServiceSDK_Shim_MultiModal[Multi-Modal]
           BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI[Shortfin v1 <-> OpenAI]
 
-          BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI -.-> BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction
+          BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI --> BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction
 
           BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction@{ shape: f-circ }
         end
@@ -164,13 +164,13 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_StabilityAI     -..-> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_ShortfinV0      -..-> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_BlackForestLabs -..-> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_StabilityAI     ---> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_ShortfinV0      ---> BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_BlackForestLabs ---> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
-      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction               --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
+      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Junction              --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
 
-      BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinV1_ShortfinV0LLM     -.-> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
+      BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinV1_ShortfinV0LLM     --> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
 
 
       subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
