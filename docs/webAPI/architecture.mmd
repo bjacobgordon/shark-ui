@@ -130,10 +130,10 @@ flowchart LR
       class BrowserApplication_WebServiceSDK_Shim ApplicationModule
 
 
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip     --> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
-      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Skip --> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_StabilityAI_Skip     -.-> BrowserApplication_WebServiceSDK_TextToImage_StabilityAI
+      BrowserApplication_WebServiceSDK_Shim_TextToImage_BlackForestLabs_Skip -.-> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
-      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip           --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
+      BrowserApplication_WebServiceSDK_Shim_MultiModal_OpenAI_Skip            --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
 
       BrowserApplication_WebServiceSDK_Shim_TextToText BrowserApplication_WebServiceSDK_Shim__TextToText__BrowserApplication_WebServiceSDK@--> BrowserApplication_WebServiceSDK_TextToText
       class BrowserApplication_WebServiceSDK_Shim__TextToText__BrowserApplication_WebServiceSDK InferenceModality
@@ -234,10 +234,10 @@ flowchart LR
           RemoteApplication_WebService_Adapter_TextToImage_StabilityAI[Stability AI <-> Shortfin v0 SDXL]
           RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs[Black Forest Labs <-> Shortfin v0 Flux]
 
-          RemoteApplication_WebService_Adapter_TextToImage_StabilityAI     -.-> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
-          RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL         --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
-          RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux         --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
-          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs -.-> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
+          RemoteApplication_WebService_Adapter_TextToImage_StabilityAI     --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
+          RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL        --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip
+          RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux        --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
+          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs --> RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip
 
           RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip@{ shape: f-circ }
           RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip@{ shape: f-circ }
