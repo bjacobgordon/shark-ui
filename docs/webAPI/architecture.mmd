@@ -51,20 +51,26 @@ flowchart LR
 
         subgraph BrowserApplication_WebPage_Adapter_TextToText[Text-To-Text]
           BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI[Chat <-> OpenAI]
+
+          BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI -.-> BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinVNext
+
+          BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinVNext[OpenAI <-> Shortfin vNext]
         end
         class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
 
-        BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI  --> BrowserApplication_WebPage_Adapter_Junction_OpenAI
-        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI      ---> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToImage_Junction_OpenAI     --> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToText_Chat_OpenAI         ---> BrowserApplication_WebPage_Adapter_Junction_OpenAI
+        BrowserApplication_WebPage_Adapter_TextToText_OpenAI_ShortfinVNext --> BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext
 
         BrowserApplication_WebPage_Adapter_Junction_OpenAI@{ shape: f-circ }
+        BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext@{ shape: f-circ }
       end
       class BrowserApplication_WebPage_Adapter ApplicationModule
     end
     class BrowserApplication_WebPage ApplicationModule
 
 
-    BrowserApplication_WebPage_Adapter_TextToImage BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API@--> BrowserApplication_WebServiceSDK_API_TextToImage
+    BrowserApplication_WebPage_Adapter_TextToImage BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API@----> BrowserApplication_WebServiceSDK_API_TextToImage
     class BrowserApplication_WebPage_Adapter_TextToImage InferenceModality
     class BrowserApplication_WebPage_Adapter__TextToImage__BrowserApplication_WebServiceSDK_API InferenceModality
 
@@ -73,7 +79,8 @@ flowchart LR
     class BrowserApplication_WebPage_Adapter__MultiModal__BrowserApplication_WebServiceSDK_API InferenceModality
 
 
-    BrowserApplication_WebPage_Adapter_Junction_OpenAI --> BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI
+    BrowserApplication_WebPage_Adapter_Junction_OpenAI        --> BrowserApplication_WebServiceSDK_API_MultiModal_OpenAI
+    BrowserApplication_WebPage_Adapter_Junction_ShortfinVNext --> BrowserApplication_WebServiceSDK_API_MultiModal_Shortfin_vNext
 
     BrowserApplication_WebPage_Adapter_TextToText BrowserApplication_WebPage_Adapter__TextToText__BrowserApplication_WebServiceSDK_API@----> BrowserApplication_WebServiceSDK_API_TextToText
     class BrowserApplication_WebPage_Adapter_TextToText InferenceModality
