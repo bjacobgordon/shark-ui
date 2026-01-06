@@ -31,7 +31,9 @@ flowchart LR
 
 
     subgraph BrowserApplication_WebServiceSDK_API[Web Service SDK API]
-      BrowserApplication_WebServiceSDK_API_TextToImage[Text-To-Image]
+      subgraph BrowserApplication_WebServiceSDK_API_TextToImage[Text-To-Image]
+        BrowserApplication_WebServiceSDK_API_TextToImage_StabilityAI[Stability AI]
+      end
       class BrowserApplication_WebServiceSDK_API_TextToImage InferenceModality
 
       BrowserApplication_WebServiceSDK_API_MultiModal[Multi-Modal]
