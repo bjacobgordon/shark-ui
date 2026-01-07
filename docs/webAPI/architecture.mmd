@@ -101,37 +101,28 @@ flowchart LR
 
 
     subgraph BrowserApplication_WebServiceSDK[Web Service SDK]
-      subgraph BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
-        BrowserApplication_WebServiceSDK_TextToImage_StabilityAI[Stability AI]
-        BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0[Shortfin v0]
-        BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs[Black Forest Labs]
-      end
+      BrowserApplication_WebServiceSDK_TextToImage[Text-To-Image]
       class BrowserApplication_WebServiceSDK_TextToImage InferenceModality
 
       subgraph BrowserApplication_WebServiceSDK_MultiModal[Multi-Modal]
-        BrowserApplication_WebServiceSDK_MultiModal_OpenAI[OpenAI]
         BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1[Shortfin v1]
       end
       class BrowserApplication_WebServiceSDK_MultiModal InferenceModality
 
-      subgraph BrowserApplication_WebServiceSDK_TextToText[Text-To-Text]
-        BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM[Shortfin v0 for LLM]
-      end
+      BrowserApplication_WebServiceSDK_TextToText[Text-To-Text]
       class BrowserApplication_WebServiceSDK_TextToText InferenceModality
     end
     class BrowserApplication_WebServiceSDK ApplicationModule
   end
 
 
-  BrowserApplication_WebServiceSDK_TextToImage_StabilityAI     --> WebAPI_TextToImage_StabilityAI
-  BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0     --> WebAPI_TextToImage_Shortfin_v0_SDXL
-  BrowserApplication_WebServiceSDK_TextToImage_Shortfin_v0     --> WebAPI_TextToImage_Shortfin_v0_Flux
-  BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs --> WebAPI_TextToImage_BlackForestLabs
+  BrowserApplication_WebServiceSDK_TextToImage BrowserApplication_WebServiceSDK__TextToImage__WebAPI_TextToImage@--> WebAPI_TextToImage
+  class BrowserApplication_WebServiceSDK__TextToImage__WebAPI_TextToImage InferenceModality
 
-  BrowserApplication_WebServiceSDK_MultiModal_OpenAI           --> WebAPI_MultiModal_OpenAI
-  BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1      --> WebAPI_MultiModal_Shortfin_v1
+  BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1 --> WebAPI_MultiModal_Shortfin_v1
 
-  BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM  --> WebAPI_TextToText_Shortfin_v0_LLM
+  BrowserApplication_WebServiceSDK_TextToText BrowserApplication_WebServiceSDK__TextToText__WebAPI_TextToText@--> WebAPI_TextToText
+  class BrowserApplication_WebServiceSDK__TextToText__WebAPI_TextToText InferenceModality
 
 
   subgraph WebAPI[Web API]
