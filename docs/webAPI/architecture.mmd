@@ -197,8 +197,8 @@ flowchart LR
           RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs_ShortfinV1[Black Forest Labs <-> Shortfin v1]
 
           RemoteApplication_WebService_Adapter_TextToImage_StabilityAI_ShortfinV1     --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
-          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
-          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1 -.-> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1 -.-> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
           RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs_ShortfinV1 --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
 
           RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction@{ shape: f-circ }
@@ -222,9 +222,9 @@ flowchart LR
         end
         class RemoteApplication_WebService_Adapter_TextToText InferenceModality
 
-        RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction      --> RemoteApplication_WebService_Adapter_Junction_v1
-        RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction       --> RemoteApplication_WebService_Adapter_Junction_v1
-        RemoteApplication_WebService_Adapter_TextToText_ShortfinV0LLM_ShortfinV1 ---> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction       --> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction        --> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_TextToText_ShortfinV0LLM_ShortfinV1 -..-> RemoteApplication_WebService_Adapter_Junction_v1
 
         RemoteApplication_WebService_Adapter_Junction_v1@{ shape: f-circ }
       end
