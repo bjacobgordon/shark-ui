@@ -105,18 +105,18 @@ flowchart LR
       subgraph BrowserApplication_WebServiceSDK_Shim[Shim]
         BrowserApplication_WebServiceSDK_Junction_ShortfinV1@{ shape: f-circ }
 
-        BrowserApplication_WebServiceSDK_Junction_ShortfinV1  --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction
-        BrowserApplication_WebServiceSDK_Junction_ShortfinV1  --> BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction
-        BrowserApplication_WebServiceSDK_Junction_ShortfinV1 ---> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinV1_ShortfinV0LLM
+        BrowserApplication_WebServiceSDK_Junction_ShortfinV1  -.-> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction
+        BrowserApplication_WebServiceSDK_Junction_ShortfinV1   --> BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction
+        BrowserApplication_WebServiceSDK_Junction_ShortfinV1 -..-> BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinV1_ShortfinV0LLM
 
 
         subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage[Text-To-Image]
           subgraph BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1[Shortfin v1]
             BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction@{ shape: f-circ }
 
-            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_StabilityAI
-            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_ShortfinV0
-            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction --> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_BlackForestLabs
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction -.-> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_StabilityAI
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction -.-> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_ShortfinV0
+            BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_Junction -.-> BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_BlackForestLabs
 
             BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_StabilityAI[Stability AI]
             BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_ShortfinV0[Shortfin v0]
@@ -130,7 +130,7 @@ flowchart LR
         subgraph BrowserApplication_WebServiceSDK_Shim_MultiModal[Multi-Modal]
           BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
 
-          BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction --> BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI
+          BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction -.-> BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI
 
           BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI[Shortfin v1 <-> OpenAI]
         end
@@ -150,7 +150,7 @@ flowchart LR
       BrowserApplication_WebServiceSDK_Shim_TextToImage_ShortfinV1_BlackForestLabs --> BrowserApplication_WebServiceSDK_TextToImage_BlackForestLabs
 
       BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_OpenAI           --> BrowserApplication_WebServiceSDK_MultiModal_OpenAI
-      BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction        -.-> BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1
+      BrowserApplication_WebServiceSDK_Shim_MultiModal_ShortfinV1_Junction         --> BrowserApplication_WebServiceSDK_MultiModal_Shortfin_v1
 
       BrowserApplication_WebServiceSDK_Shim_TextToText_ShortfinV1_ShortfinV0LLM    --> BrowserApplication_WebServiceSDK_TextToText_Shortfin_v0_LLM
 
