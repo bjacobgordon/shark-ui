@@ -259,50 +259,27 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API Contract
 
 
-    RemoteApplication_InferencePipeline_API_TextToImage RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_Adapter_TextToImage
+    RemoteApplication_InferencePipeline_API_TextToImage RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToImage
     class RemoteApplication_InferencePipeline_API_TextToImage InferenceModality
     class RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline InferenceModality
 
-    RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1 --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction
 
-    RemoteApplication_InferencePipeline_API_TextToText RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_Adapter_TextToText
+    RemoteApplication_InferencePipeline_API_MultiModal_Shortfin_v1 --> RemoteApplication_InferencePipeline_MultiModal_ShortfinV1_Junction
+
+    RemoteApplication_InferencePipeline_API_MultiModal RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline@----> RemoteApplication_InferencePipeline_MultiModal
+    class RemoteApplication_InferencePipeline_API_MultiModal InferenceModality
+    class RemoteApplication_InferencePipeline_API__MultiModal__RemoteApplication_InferencePipeline InferenceModality
+
+
+    RemoteApplication_InferencePipeline_API_TextToText RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToText
     class RemoteApplication_InferencePipeline_API__TextToText__RemoteApplication_InferencePipeline InferenceModality
 
 
     subgraph RemoteApplication_InferencePipeline[Inference Pipeline]
-      subgraph RemoteApplication_InferencePipeline_Adapter[Adapter]
-        RemoteApplication_InferencePipeline_Adapter_TextToImage[Text-To-Image]
-        class RemoteApplication_InferencePipeline_Adapter_TextToImage InferenceModality
+      RemoteApplication_InferencePipeline_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
 
-
-        subgraph RemoteApplication_InferencePipeline_Adapter_MultiModal[Multi-Modal]
-          RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
-        end
-        class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
-
-
-        RemoteApplication_InferencePipeline_Adapter_TextToText[Text-To-Text]
-        class RemoteApplication_InferencePipeline_Adapter_TextToText InferenceModality
-      end
-      class RemoteApplication_InferencePipeline_Adapter ApplicationModule
-
-
-      RemoteApplication_InferencePipeline_Adapter_TextToImage RemoteApplication_InferencePipeline_Adapter__TextToImage__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToImage
-      class RemoteApplication_InferencePipeline_Adapter__TextToImage__RemoteApplication_InferencePipeline InferenceModality
-
-
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_TextToImage_Junction_v1
-
-      RemoteApplication_InferencePipeline_Adapter_MultiModal RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline@---> RemoteApplication_InferencePipeline_MultiModal
-      class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
-      class RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline InferenceModality
-
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_TextToText_Junction_v1
-
-
-      RemoteApplication_InferencePipeline_Adapter_TextToText RemoteApplication_InferencePipeline_Adapter__TextToText__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToText
-      class RemoteApplication_InferencePipeline_Adapter__TextToText__RemoteApplication_InferencePipeline InferenceModality
-
+      RemoteApplication_InferencePipeline_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_TextToImage_Junction_v1
+      RemoteApplication_InferencePipeline_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_TextToText_Junction_v1
 
       subgraph RemoteApplication_InferencePipeline_TextToText[Text-To-Text]
         RemoteApplication_InferencePipeline_TextToText_Junction_v1@{ shape: f-circ }
