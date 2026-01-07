@@ -259,7 +259,7 @@ flowchart LR
     class RemoteApplication_InferencePipeline_API Contract
 
 
-    RemoteApplication_InferencePipeline_API_TextToImage RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_Adapter_TextToImage
+    RemoteApplication_InferencePipeline_API_TextToImage RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline@---> RemoteApplication_InferencePipeline_Adapter_TextToImage
     class RemoteApplication_InferencePipeline_API_TextToImage InferenceModality
     class RemoteApplication_InferencePipeline_API__TextToImage__RemoteApplication_InferencePipeline InferenceModality
 
@@ -278,10 +278,8 @@ flowchart LR
         subgraph RemoteApplication_InferencePipeline_Adapter_MultiModal[Multi-Modal]
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
 
-          RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM
 
-          RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL[v1 <-> v0 for SDXL]
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM[v1 <-> v0 for LLM]
         end
         class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
@@ -297,14 +295,13 @@ flowchart LR
       class RemoteApplication_InferencePipeline_Adapter__TextToImage__RemoteApplication_InferencePipeline InferenceModality
 
 
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL ---> RemoteApplication_InferencePipeline_TextToImage_SDXL
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction      ----> RemoteApplication_InferencePipeline_TextToImage_v1_Flux
+      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction     ---> RemoteApplication_InferencePipeline_TextToImage_Junction_v1
 
       RemoteApplication_InferencePipeline_Adapter_MultiModal RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline@----> RemoteApplication_InferencePipeline_MultiModal
       class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
       class RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline InferenceModality
 
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM   --> RemoteApplication_InferencePipeline_TextToText_Junction_v0
+      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM --> RemoteApplication_InferencePipeline_TextToText_Junction_v0
 
 
       RemoteApplication_InferencePipeline_Adapter_TextToText RemoteApplication_InferencePipeline_Adapter__TextToText__RemoteApplication_InferencePipeline@--> RemoteApplication_InferencePipeline_TextToText
@@ -328,7 +325,12 @@ flowchart LR
       class RemoteApplication_InferencePipeline_MultiModal InferenceModality
 
       subgraph RemoteApplication_InferencePipeline_TextToImage[Text-To-Image]
-        RemoteApplication_InferencePipeline_TextToImage_SDXL[v0 SDXL]
+        RemoteApplication_InferencePipeline_TextToImage_Junction_v1@{ shape: f-circ }
+
+        RemoteApplication_InferencePipeline_TextToImage_Junction_v1 --> RemoteApplication_InferencePipeline_TextToImage_v1_SDXL
+        RemoteApplication_InferencePipeline_TextToImage_Junction_v1 --> RemoteApplication_InferencePipeline_TextToImage_v1_Flux
+
+        RemoteApplication_InferencePipeline_TextToImage_v1_SDXL[v1 SDXL]
         RemoteApplication_InferencePipeline_TextToImage_v1_Flux[v1 Flux]
       end
       class RemoteApplication_InferencePipeline_TextToImage InferenceModality
