@@ -279,11 +279,9 @@ flowchart LR
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
 
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL
-          RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0Flux
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction --> RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM
 
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL[v1 <-> v0 for SDXL]
-          RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0Flux[v1 <-> v0 for Flux]
           RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0LLM[v1 <-> v0 for LLM]
         end
         class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
@@ -300,7 +298,7 @@ flowchart LR
 
 
       RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0SDXL ---> RemoteApplication_InferencePipeline_TextToImage_SDXL
-      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_ShortfinV0Flux ---> RemoteApplication_InferencePipeline_TextToImage_Flux
+      RemoteApplication_InferencePipeline_Adapter_MultiModal_ShortfinV1_Junction      ----> RemoteApplication_InferencePipeline_TextToImage_v1_Flux
 
       RemoteApplication_InferencePipeline_Adapter_MultiModal RemoteApplication_InferencePipeline_Adapter__MultiModal__RemoteApplication_InferencePipeline@----> RemoteApplication_InferencePipeline_MultiModal
       class RemoteApplication_InferencePipeline_Adapter_MultiModal InferenceModality
@@ -331,7 +329,7 @@ flowchart LR
 
       subgraph RemoteApplication_InferencePipeline_TextToImage[Text-To-Image]
         RemoteApplication_InferencePipeline_TextToImage_SDXL[v0 SDXL]
-        RemoteApplication_InferencePipeline_TextToImage_Flux[v0 Flux]
+        RemoteApplication_InferencePipeline_TextToImage_v1_Flux[v1 Flux]
       end
       class RemoteApplication_InferencePipeline_TextToImage InferenceModality
     end
