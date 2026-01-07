@@ -182,7 +182,8 @@ flowchart LR
 
       RemoteApplication_WebService_TextToImage_StabilityAI      --> RemoteApplication_WebService_Adapter_TextToImage_StabilityAI_ShortfinV1
       RemoteApplication_WebService_TextToImage_Shortfin_v0_SDXL --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1
-      RemoteApplication_WebService_TextToImage_BlackForestLabs  --> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs
+      RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
+      RemoteApplication_WebService_TextToImage_BlackForestLabs  --> RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs_ShortfinV1
 
       RemoteApplication_WebService_MultiModal_OpenAI            --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI
 
@@ -192,16 +193,13 @@ flowchart LR
         subgraph RemoteApplication_WebService_Adapter_TextToImage[Text-To-Image]
           RemoteApplication_WebService_Adapter_TextToImage_StabilityAI_ShortfinV1[Stability AI <-> Shortfin v1]
           RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1[Shortfin v0 SDXL <-> Shortfin v1]
-          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs[Black Forest Labs <-> Shortfin v0 Flux]
-
-          RemoteApplication_WebService_Adapter_TextToImage_StabilityAI_ShortfinV1 ---> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
-          RemoteApplication_WebService_TextToImage_Shortfin_v0_Flux               ---> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
-          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs         --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
-
           RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1[Shortfin v0 Flux <-> Shortfin v1]
+          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs_ShortfinV1[Black Forest Labs <-> Shortfin v1]
 
-          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1 --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
-          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1 --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_StabilityAI_ShortfinV1     --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_TextToImage_BlackForestLabs_ShortfinV1 --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction
 
           RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction@{ shape: f-circ }
         end
@@ -224,9 +222,9 @@ flowchart LR
         end
         class RemoteApplication_WebService_Adapter_TextToText InferenceModality
 
-        RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction       --> RemoteApplication_WebService_Adapter_Junction_v1
-        RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction        --> RemoteApplication_WebService_Adapter_Junction_v1
-        RemoteApplication_WebService_Adapter_TextToText_ShortfinV0LLM_ShortfinV1 ----> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_TextToImage_ShortfinV1_Junction      --> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction       --> RemoteApplication_WebService_Adapter_Junction_v1
+        RemoteApplication_WebService_Adapter_TextToText_ShortfinV0LLM_ShortfinV1 ---> RemoteApplication_WebService_Adapter_Junction_v1
 
         RemoteApplication_WebService_Adapter_Junction_v1@{ shape: f-circ }
       end
