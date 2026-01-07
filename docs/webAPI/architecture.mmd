@@ -215,14 +215,24 @@ flowchart LR
             RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux[Shortfin v0 Flux]
             RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM[Shortfin v0 LLM]
 
-            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0LLM_ShortfinV1
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0SDXL_ShortfinV1
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0Flux_ShortfinV1
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0LLM  --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0LLM_ShortfinV1
 
+            RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0SDXL_ShortfinV1[Shortfin v0 SDXL <-> Shortfin v1]
+            RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0Flux_ShortfinV1[Shortfin v0 Flux <-> Shortfin v1]
             RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0LLM_ShortfinV1[Shortfin v0 LLM <-> Shortfin v1]
+
+            RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0SDXL_ShortfinV1 --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_ShortfinV1
+            RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0Flux_ShortfinV1 --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_ShortfinV1
+            RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0LLM_ShortfinV1  --> RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_ShortfinV1
+
+            RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_ShortfinV1@{ shape: f-circ }
           end
           class RemoteApplication_WebService_Adapter_MultiModal_OpenAI ApplicationModule
 
-          RemoteApplication_WebService_Adapter_MultiModal_ShortfinV0LLM_ShortfinV1 --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction
-          RemoteApplication_WebService_MultiModal_Shortfin_v1                      --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction
+          RemoteApplication_WebService_Adapter_MultiModal_OpenAI_Junction_ShortfinV1 --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction
+          RemoteApplication_WebService_MultiModal_Shortfin_v1                        --> RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction
 
           RemoteApplication_WebService_Adapter_MultiModal_ShortfinV1_Junction@{ shape: f-circ }
         end
@@ -235,16 +245,9 @@ flowchart LR
         class RemoteApplication_WebService_Adapter_TextToText InferenceModality
 
 
-        RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip --> RemoteApplication_WebService_Adapter_Junction_v0_SDXL
-        RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip --> RemoteApplication_WebService_Adapter_Junction_v0_Flux
-        RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0SDXL ---> RemoteApplication_WebService_Adapter_Junction_v0_SDXL
-        RemoteApplication_WebService_Adapter_MultiModal_OpenAI_ShortfinV0Flux ---> RemoteApplication_WebService_Adapter_Junction_v0_Flux
+        RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_SDXL_Skip  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1
+        RemoteApplication_WebService_Adapter_TextToImage_Shortfin_v0_Flux_Skip  --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
 
-        RemoteApplication_WebService_Adapter_Junction_v0_SDXL@{ shape: f-circ }
-        RemoteApplication_WebService_Adapter_Junction_v0_Flux@{ shape: f-circ }
-
-        RemoteApplication_WebService_Adapter_Junction_v0_SDXL                   --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1
-        RemoteApplication_WebService_Adapter_Junction_v0_Flux                   --> RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0Flux_ShortfinV1
         RemoteApplication_WebService_Adapter_TextToText_Shortfin_v0_LLM_Skip  ----> RemoteApplication_WebService_Adapter_TextToText_ShortfinV0LLM_ShortfinV1
 
         RemoteApplication_WebService_Adapter_TextToImage_ShortfinV0SDXL_ShortfinV1[Shortfin v0 for SDXL <-> Shortfin v1]
