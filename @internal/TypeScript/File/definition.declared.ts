@@ -15,10 +15,6 @@ import {
 } from 'ts-morph';
 
 import {
-  InternalProject,
-} from '../../../TSMorph';
-
-import {
   soleElementIn,
 } from '../../utilitiesByType/array';
 
@@ -70,15 +66,6 @@ class TypeScript_File
     const exportsFromModule = yield* this.exportsUsing(givenProject);
     const soleExportFromModule = yield* soleElementIn(exportsFromModule);
     return soleExportFromModule;
-  });
-
-  public readonly soleExport: Effect.Effect<
-    Symbol,
-    Error,
-    Path.Path
-  > = Effect.gen(this, function* () {
-    const temporaryProject = new InternalProject();
-    return yield* this.soleExportUsing(temporaryProject);
   });
 
   public readonly soleExportIsCallableUsing = (
