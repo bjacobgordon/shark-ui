@@ -20,6 +20,7 @@ import {
 
 import {
   hasCallableTarget,
+  doesTargetValueConstructor,
 } from '../Declaration';
 
 class TypeScript_File
@@ -81,6 +82,25 @@ class TypeScript_File
     if (
       Node.isExportSpecifier(soleExportDeclaration)
     ) return yield* hasCallableTarget(soleExportDeclaration);
+
+    const serializedPath = yield* this.path.serialized;
+    const exportSpecificationError = new Error(`Sole export declaration in ${serializedPath} was not an export specifier.`);
+    return yield* Effect.fail(exportSpecificationError);
+  });
+
+  public readonly soleExportIsValueConstructorUsing = (
+    givenProject: Project,
+  ): Effect.Effect<
+    boolean,
+    Error,
+    Path.Path
+  > => Effect.gen(this, function* () {
+    const soleExportSymbol = yield* this.soleExportUsing(givenProject);
+    const soleExportDeclaration = yield* soleElementIn(soleExportSymbol.getDeclarations());
+
+    if (
+      Node.isExportSpecifier(soleExportDeclaration)
+    ) return yield* doesTargetValueConstructor(soleExportDeclaration);
 
     const serializedPath = yield* this.path.serialized;
     const exportSpecificationError = new Error(`Sole export declaration in ${serializedPath} was not an export specifier.`);
