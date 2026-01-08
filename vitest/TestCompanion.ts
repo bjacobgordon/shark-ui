@@ -77,7 +77,7 @@ class TestCompanion
       ],
     });
 
-    const soleExportFromUnit = yield* this.unit.soleExport;
+    const soleExportFromUnit = yield* this.unit.soleExportUsing(givenProject);
     const soleExportFromUnit_name = soleExportFromUnit.getName();
 
     testCompanionSource.addImportDeclaration({
