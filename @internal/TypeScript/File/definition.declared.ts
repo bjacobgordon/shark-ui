@@ -60,15 +60,6 @@ class TypeScript_File
     return exportsFromModule;
   });
 
-  public readonly exports: Effect.Effect<
-    Symbol[],
-    Error,
-    Path.Path
-  > = Effect.gen(this, function* () {
-    const temporaryProject = new InternalProject();
-    return yield* this.exportsUsing(temporaryProject);
-  });
-
   public readonly soleExportUsing = (
     givenProject: Project,
   ): Effect.Effect<
